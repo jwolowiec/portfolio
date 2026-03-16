@@ -25,6 +25,7 @@ export default function ProjectCard(props: ProjectCardProps) {
                 src={props.image}
                 alt={`Zrzut ekranu: ${props.name}`}
                 className="grow object-cover rounded-xl"
+                loading="eager"
             />
             <div
                 className="absolute bottom-0 inset-0 m-1 flex flex-col justify-end items-center gap-2"

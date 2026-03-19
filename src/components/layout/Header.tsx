@@ -4,7 +4,7 @@ import {AnimatePresence, motion} from "framer-motion";
 import Link from "next/link";
 import {usePathname} from "next/navigation";
 import {useEffect, useState} from "react";
-import {Menu, X} from "lucide-react";
+import {LuMenu, LuX} from "react-icons/lu";
 
 const navLinks = [
     {name: "Strona główna", href: "/"},
@@ -59,7 +59,7 @@ export default function Header() {
                     onClick={() => setIsOpen(!isOpen)}
                     className="p-3 bg-neutral-900/80 backdrop-blur-md border border-neutral-800 rounded-full active:scale-90 transition-transform"
                 >
-                    {isOpen ? <X size={24}/> : <Menu size={24}/>}
+                    {isOpen ? <LuX size={24}/> : <LuMenu size={24}/>}
                 </button>
             </div>
             <AnimatePresence>

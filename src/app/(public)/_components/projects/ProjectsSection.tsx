@@ -3,7 +3,7 @@
 import {motion} from "framer-motion";
 import Slider from "@/components/ui/Slider";
 import ProjectCard from "@/app/(public)/_components/projects/ProjectCard";
-import {ArrowRight} from "lucide-react";
+import {LuArrowRight} from "react-icons/lu";
 import BentoContainer from "@/components/ui/BentoContainer";
 import grawerkiCnc from "../../../../../public/grawerki-cnc.png";
 import embeddeSystemsServer from "../../../../../public/embedded-systems-server.png";
@@ -57,7 +57,7 @@ export default function ProjectsSection() {
                         <a href="/projects" className="flex flex-col items-center gap-2">
                             <div
                                 className="w-12 h-12 flex flex-row justify-center items-center rounded-full border border-green-500/30 text-green-400 hover:scale-110 transition-all">
-                                <ArrowRight/>
+                                <LuArrowRight/>
                             </div>
                             <p className="text-center text-green-400">Zobacz więcej</p>
                         </a>

@@ -1,20 +1,22 @@
 "use client";
 
 import React, {useEffect, useRef, useState} from "react";
-import {ChevronLeft, ChevronRight} from "lucide-react";
+import {LuChevronLeft, LuChevronRight} from "react-icons/lu";
+import {BREAKPOINTS} from "@/constants/breakpoints";
 
-interface Breakpoints {
-    sm?: number;
-    md?: number;
-    lg?: number;
-    xl?: number;
-}
+type BreakpointKey = keyof typeof BREAKPOINTS;
+
+type Breakpoints = Partial<Record<BreakpointKey, number>>;
 
 interface SliderProps {
     children?: React.ReactNode;
     className?: string;
     breakpoints?: Breakpoints
 }
+
+const sortedKeys = (Object.keys(BREAKPOINTS) as BreakpointKey[]).sort(
+    (a, b) => BREAKPOINTS[b] - BREAKPOINTS[a]
+);
 
 export default function Slider({children, className = "", breakpoints}: SliderProps){
     const sliderRef = useRef<HTMLDivElement>(null);
@@ -25,17 +27,12 @@ export default function Slider({children, className = "", breakpoints}: SliderPr
     useEffect(() => {
         const handleResize = () => {
             const width = window.innerWidth;
-            let newCols = 1;
 
-            if (breakpoints?.xl && width >= 1280) {
-                newCols = breakpoints.xl;
-            } else if (breakpoints?.lg && width >= 1024) {
-                newCols = breakpoints.lg;
-            } else if (breakpoints?.md && width >= 768) {
-                newCols = breakpoints.md;
-            } else if (breakpoints?.sm && width >= 640) {
-                newCols = breakpoints.sm;
-            }
+            const activeKey = sortedKeys.find(key =>
+                breakpoints?.[key] !== undefined && width >= BREAKPOINTS[key]
+            );
+
+            const newCols = activeKey && breakpoints ? breakpoints[activeKey]! : 1;
 
             if (newCols !== currentCols) {
                 setCurrentCols(newCols);
@@ -88,11 +85,12 @@ export default function Slider({children, className = "", breakpoints}: SliderPr
 
     const handleScroll = () => {
         if (!sliderRef.current) return;
-
         const scrollPosition = sliderRef.current.scrollLeft;
-        const slideWidth = sliderRef.current.clientWidth / currentCols;
+        const stepSize = getScrollStep();
 
-        const currentIndex = Math.round(scrollPosition / slideWidth);
+        if (stepSize === 0) return;
+
+        const currentIndex = Math.round(scrollPosition / stepSize);
 
         if (currentIndex !== isActive) {
             setIsActive(currentIndex);
@@ -117,7 +115,7 @@ export default function Slider({children, className = "", breakpoints}: SliderPr
                     disabled={isActive === 0}
                     className="cursor-pointer disabled:opacity-30 disabled:cursor-default transition-opacity"
                 >
-                    <ChevronLeft className="text-green-400" strokeWidth={1} size={48}/>
+                    <LuChevronLeft className="text-green-400" strokeWidth={1} size={48}/>
                 </button>
             </div>
             <div ref={sliderRef}
@@ -141,7 +139,7 @@ export default function Slider({children, className = "", breakpoints}: SliderPr
                     disabled={isActive === pagination - 1}
                     className="cursor-pointer disabled:opacity-30 disabled:cursor-default transition-opacity"
                 >
-                    <ChevronRight className="text-green-400" strokeWidth={1} size={48}/>
+                    <LuChevronRight className="text-green-400" strokeWidth={1} size={48}/>
                 </button>
             </div>
             <div className="md:hidden flex justify-center items-center gap-2">

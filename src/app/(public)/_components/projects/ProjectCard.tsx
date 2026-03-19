@@ -1,7 +1,7 @@
 import Image, {StaticImageData} from "next/image";
 import Button from "@/components/ui/Button";
 import Pill from "@/components/ui/Pill";
-import {ChevronUp} from "lucide-react";
+import {LuChevronUp} from "react-icons/lu";
 import {useState} from "react";
 import {AnimatePresence, motion} from "framer-motion";
 
@@ -18,7 +18,7 @@ export default function ProjectCard(props: ProjectCardProps) {
         <div
             className="
                 relative rounded-2xl bg-neutral-900/80 backdrop-blur-md w-full h-full
-                border border-neutral-500/30 hover:border-neutral-500 transition-all
+                border border-neutral-500/30 hover:border-neutral-500 transition-all duration-400
                 overflow-hidden flex flex-col"
         >
             <Image
@@ -38,7 +38,7 @@ export default function ProjectCard(props: ProjectCardProps) {
                         bg-neutral-900/80 backdrop-blur-md
                         border-neutral-500/30 rounded-full p-1 hover:scale-105"
                 >
-                    <ChevronUp
+                    <LuChevronUp
                         className={`text-green-400 ${isExpanded ? "rotate-180" : ""} transition-all duration-500`}
                         strokeWidth={1} size={24}/>
                 </button>

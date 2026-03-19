@@ -41,7 +41,7 @@ export default function ExperienceSection() {
                             <div
                                 className="
                                     flex flex-col bg-neutral-900/80 backdrop-blur-md border border-neutral-500/30
-                                    hover:border-neutral-500 transition-all w-full rounded-lg p-3"
+                                    hover:border-neutral-500 transition-all duration-400 w-full rounded-lg p-3"
                             >
                                 <p className="font-medium text-green-400">
                                     {item.date}

@@ -26,7 +26,7 @@ const projects = [
 export default function ProjectsSection() {
     return (
         <BentoContainer className="col-span-full md:col-span-4 lg:col-span-5 row-span-2 flex flex-col">
-            <h2 className="text-2xl font-medium mb-4">Projekty</h2>
+            <h2 className="text-3xl font-medium mb-4">Projekty</h2>
             <div
                 className="h-full"
             >

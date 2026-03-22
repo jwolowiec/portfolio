@@ -23,9 +23,20 @@ interface ButtonTypes extends BaseProps, React.ButtonHTMLAttributes<HTMLButtonEl
 
 type ButtonProps = LinkTypes | ButtonTypes;
 
-const shapes: Record<ButtonShape, string> = {
-    pill: "px-5 py-2",
-    circle: "p-3"
+const pillPaddings: Record<ButtonSize, string> = {
+    xs: "px-3 py-1",
+    sm: "px-4 py-1.5",
+    md: "px-5 py-2",
+    lg: "px-6 py-2.5",
+    xl: "px-8 py-3",
+};
+
+const circlePaddings: Record<ButtonSize, string> = {
+    xs: "p-1.5",
+    sm: "p-2",
+    md: "p-3",
+    lg: "p-3.5",
+    xl: "p-4",
 };
 
 const variants: Record<ButtonVariant, string> = {
@@ -49,7 +60,12 @@ export default function Button(props: ButtonProps) {
     const size = props.size || "md";
     const shape = props.shape || "pill";
     const customClasses = props.className || "";
-    const combinedClasses = `${baseStyles} ${customClasses} ${variants[variant]} ${sizes[size]} ${variants[variant] !== "link" ? shapes[shape] : ""}`;
+
+    const shapeClasses = variant !== "link"
+        ? (shape === "pill" ? pillPaddings[size] : circlePaddings[size])
+        : "";
+
+    const combinedClasses = `${baseStyles} ${customClasses} ${variants[variant]} ${sizes[size]} ${shapeClasses}`;
 
     if (props.href !== undefined) {
         const { variant: _v, children, className: _c, ...linkProps } = props;

@@ -18,7 +18,7 @@ export default function ProjectCard(props: ProjectCardProps) {
         <div
             className="
                 relative rounded-2xl bg-neutral-900/80 backdrop-blur-md w-full h-full
-                border border-neutral-500/30 hover:border-neutral-500 transition-all duration-400
+                border border-neutral-500/30 hover:border-green-500/30 transition-all duration-400
                 overflow-hidden flex flex-col"
         >
             <Image
@@ -79,8 +79,8 @@ export default function ProjectCard(props: ProjectCardProps) {
                             >
                                 <div className="flex flex-col items-center gap-4 h-full min-h-0 w-full">
                                     <div className="flex flex-row gap-2">
-                                        <Button size="xs" href={props.url}>Odwiedź</Button>
-                                        <Button variant="secondary" size="xs" href="/projects">Opis</Button>
+                                        <Button size="sm" href={props.url}>Odwiedź</Button>
+                                        <Button variant="secondary" size="sm" href="/projects">Opis</Button>
                                     </div>
                                     <p>Technologie</p>
                                     <div className="flex flex-row justify-center gap-2 flex-wrap overflow-y-auto">

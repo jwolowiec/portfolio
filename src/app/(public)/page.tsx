@@ -12,11 +12,11 @@ export default function Page() {
 
             <ProjectsSection />
 
-            <ExperienceSection />
+            <AboutMeSection />
 
             <TechnologySection />
 
-            <AboutMeSection />
+            <ExperienceSection />
 
             <ContactSection />
         </div>

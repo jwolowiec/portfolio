@@ -45,7 +45,7 @@ const itemVariants: Variants = {
 export default function ExperienceSection() {
     return (
         <BentoContainer className="col-span-full md:col-span-2 lg:col-span-3 row-span-2">
-            <h2 className="text-2xl font-medium mb-4">Doświadczenie</h2>
+            <h2 className="text-3xl font-medium mb-4">Doświadczenie</h2>
             <motion.ol
                 variants={containerVariants}
                 initial="hidden"
@@ -63,7 +63,7 @@ export default function ExperienceSection() {
                             <div
                                 className="
                                     flex flex-col bg-neutral-900/80 backdrop-blur-md border border-neutral-500/30
-                                    hover:border-neutral-500 transition-all duration-400 w-full rounded-lg p-3"
+                                    hover:border-green-500/30 transition-all duration-400 w-full rounded-lg p-3"
                             >
                                 <p className="font-medium text-green-400">
                                     {item.date}

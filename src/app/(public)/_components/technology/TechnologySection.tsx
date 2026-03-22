@@ -2,15 +2,30 @@
 
 import BentoContainer from "@/components/ui/BentoContainer";
 import { TECHNOLOGIES } from "@/constants/technologies";
-import {AnimatePresence, motion} from "framer-motion";
+import {motion, Variants} from "framer-motion";
 import { useState, useEffect } from "react";
 import {BREAKPOINTS} from "@/constants/breakpoints";
+import TechnologyCard from "@/app/(public)/_components/technology/TechnologyCard";
 
 const gridSize = [
     { minWidth: BREAKPOINTS.lg, cols: 8 },
     { minWidth: BREAKPOINTS.md, cols: 6 },
     { minWidth: BREAKPOINTS.sm, cols: 4 },
 ];
+
+const itemVariants: Variants = {
+    hidden: { opacity: 0, y: 15, scale: 0.95 },
+    visible: (i: number) => ({
+        opacity: 1,
+        y: 0,
+        scale: 1,
+        transition: {
+            duration: 0.5,
+            ease: "easeOut",
+            delay: i * 0.08
+        }
+    })
+};
 
 export default function TechnologySection() {
     const [index, setIndex] = useState<number>(0);
@@ -41,36 +56,25 @@ export default function TechnologySection() {
 
     return (
         <BentoContainer className="col-span-full flex flex-col">
-            <h2 className="text-2xl font-medium mb-4">Technologie</h2>
-            <div className="grow grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 justify-center items-center gap-4 h-full w-full">
+            <div
+                className="grow grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 justify-center items-center gap-4 h-full w-full"
+            >
                 {Array.from({ length: visibleCount }).map((_, i) => {
                     const techIndex = (i + index) % TECHNOLOGIES.length;
                     const technology = TECHNOLOGIES[techIndex];
 
                     return (
-                        <div
+                        <motion.div
                             key={i}
-                            className="flex justify-center items-center w-full h-full perspective-normal"
+                            custom={i}
+                            variants={itemVariants}
+                            initial="hidden"
+                            whileInView="visible"
+                            viewport={{ once: true, amount: 0.2 }}
+                            className="h-full w-full"
                         >
-                            <AnimatePresence mode="wait">
-                                <motion.div
-                                    key={technology.name}
-                                    initial={{ rotateY: 90 }}
-                                    animate={{
-                                        rotateY: 0,
-                                        transition: { duration: 0.2, ease: "easeOut" }
-                                    }}
-                                    exit={{
-                                        rotateY: -90,
-                                        transition: { duration: 0.2, ease: "easeIn", delay: 0.2 * i }
-                                    }}
-                                    className="flex flex-col justify-center items-center gap-2"
-                                >
-                                    <technology.icon size={56} className="text-green-400"/>
-                                    <p>{technology.name}</p>
-                                </motion.div>
-                            </AnimatePresence>
-                        </div>
+                            <TechnologyCard technology={technology} index={i} />
+                        </motion.div>
                     )
                 })}
             </div>

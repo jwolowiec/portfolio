@@ -1,7 +1,7 @@
 'use client';
 
 import BentoContainer from "@/components/ui/BentoContainer";
-import { motion } from "framer-motion";
+import {motion, stagger, Variants} from "framer-motion";
 
 const timelineData = [
     {
@@ -21,22 +21,44 @@ const timelineData = [
     }
 ];
 
+const containerVariants: Variants = {
+    hidden: {opacity: 0},
+    visible: {
+        opacity: 1,
+        transition: {
+            delayChildren: stagger(0.1)
+        }
+    }
+};
+
+const itemVariants: Variants = {
+    hidden: { y: -32, opacity: 0 },
+    visible: {
+        y: 0,
+        opacity: 1,
+        transition: {
+            duration: 0.6,
+        }
+    }
+};
+
 export default function ExperienceSection() {
     return (
         <BentoContainer className="col-span-full md:col-span-2 lg:col-span-3 row-span-2">
             <h2 className="text-2xl font-medium mb-4">Doświadczenie</h2>
-            <ol className="flex flex-col gap-4">
-                {timelineData.map((item, index) => {
+            <motion.ol
+                variants={containerVariants}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{once: true, amount: 0.2}}
+                className="flex flex-col gap-4"
+            >
+                {timelineData.map((item) => {
                     return (
                         <motion.li
-                            initial={{y: -32, opacity: 0}}
-                            animate={{y: 0, opacity: 1}}
-                            transition={{
-                                duration: 0.6,
-                                ease: "easeOut",
-                                delay: 0.1 * index
-                            }}
-                            className="flex flex-row items-center gap-4" key={item.title}
+                            key={item.title}
+                            variants={itemVariants}
+                            className="flex flex-row items-center gap-4"
                         >
                             <div
                                 className="
@@ -56,7 +78,7 @@ export default function ExperienceSection() {
                         </motion.li>
                     );
                 })}
-            </ol>
+            </motion.ol>
         </BentoContainer>
     );
 }

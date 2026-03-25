@@ -2,7 +2,7 @@
 
 import {motion} from "framer-motion";
 import Image from "next/image";
-import mainImg from "../../../../public/main-img.jpg";
+import mainImg from "@public/main-img.jpg";
 import BentoContainer from "@/components/ui/BentoContainer";
 
 export default function HeroSection() {

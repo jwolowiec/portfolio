@@ -1,27 +1,8 @@
-'use client';
-
-import {motion} from "framer-motion";
 import Slider from "@/components/ui/Slider";
 import ProjectCard from "@/app/(public)/_components/projects/ProjectCard";
 import {LuArrowRight} from "react-icons/lu";
 import BentoContainer from "@/components/ui/BentoContainer";
-import grawerkiCnc from "../../../../../public/grawerki-cnc.png";
-import embeddedSystemsServer from "../../../../../public/embedded-systems-server.png";
-
-const projects = [
-    {
-        image: grawerkiCnc,
-        name: "PZ Grawerki - Oficjalna strona",
-        url: "https://grawerki-cnc.pl",
-        technologies: ["Node.js", "Express.js", "MongoDB", "Git", "Ubuntu", "Nginx", "Bootstrap"]
-    },
-    {
-        image: embeddedSystemsServer,
-        name: "System zarządzania kartami RFID",
-        url: "https://github.com/jwolowiec/embedded-systems-server",
-        technologies: ["Node.js", "Express.js", "MongoDB", "Python", "Git", "SQLite", "Bootstrap"]
-    }
-]
+import {projects} from "@/app/(public)/_components/projects/data";
 
 export default function ProjectsSection() {
     return (
@@ -37,20 +18,14 @@ export default function ProjectsSection() {
                         </div>
                     ) : projects.map((project, index) => {
                         return (
-                            <motion.div
+                            <ProjectCard
                                 key={index}
-                                initial={{opacity: 0}}
-                                animate={{opacity: 1}}
-                                transition={{duration: 0.6, ease: "easeInOut", delay: 0.2 * index}}
-                                className="w-full h-full"
-                            >
-                                <ProjectCard
-                                    image={project.image}
-                                    name={project.name}
-                                    url={project.url}
-                                    technologies={project.technologies}
-                                />
-                            </motion.div>
+                                image={project.image}
+                                name={project.name}
+                                url={project.url}
+                                technologies={project.technologies}
+                                index={index}
+                            />
                         )
                     })}
                     <div className="w-full h-full flex flex-row justify-center items-center">

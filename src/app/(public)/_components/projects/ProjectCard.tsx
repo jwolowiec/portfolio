@@ -1,24 +1,33 @@
+"use client";
+
 import Image, {StaticImageData} from "next/image";
 import Button from "@/components/ui/Button";
 import Pill from "@/components/ui/Pill";
 import {LuChevronUp} from "react-icons/lu";
 import {useState} from "react";
 import {AnimatePresence, motion} from "framer-motion";
+import {containerVariants} from "@/app/(public)/_components/projects/animations";
 
 interface ProjectCardProps {
     image: StaticImageData;
     name: string;
     url: string;
     technologies: string[];
+    index: number;
 }
 
 export default function ProjectCard(props: ProjectCardProps) {
     const [isExpanded, setIsExpanded] = useState<boolean>(false);
     return (
-        <div
+        <motion.div
+            variants={containerVariants}
+            custom={props.index}
+            initial="hidden"
+            animate="visible"
+            viewport={{once: true, amount: 0.4}}
             className="
                 relative rounded-2xl bg-neutral-900/80 backdrop-blur-md w-full h-full
-                border border-neutral-500/30 hover:border-green-500/30 transition-all duration-400
+                border border-neutral-500/30 hover:border-green-500/30 transition-colors duration-400
                 overflow-hidden flex flex-col"
         >
             <Image
@@ -75,7 +84,7 @@ export default function ProjectCard(props: ProjectCardProps) {
                                         transition: {opacity: {duration: 0.3}}
                                     }
                                 }}
-                                className="w-full h-full"
+                                className="w-full h-full pt-2 overflow-y-auto scrollbar"
                             >
                                 <div className="flex flex-col items-center gap-4 h-full min-h-0 w-full">
                                     <div className="flex flex-row gap-2">
@@ -83,7 +92,7 @@ export default function ProjectCard(props: ProjectCardProps) {
                                         <Button variant="secondary" size="sm" href="/projects">Opis</Button>
                                     </div>
                                     <p>Technologie</p>
-                                    <div className="flex flex-row justify-center gap-2 flex-wrap overflow-y-auto">
+                                    <div className="flex flex-row justify-center gap-2 flex-wrap">
                                         {props.technologies.map((technology, index) => {
                                             return (
                                                 <Pill key={index}>{technology}</Pill>
@@ -96,6 +105,6 @@ export default function ProjectCard(props: ProjectCardProps) {
                     </AnimatePresence>
                 </motion.div>
             </div>
-        </div>
+        </motion.div>
     );
 }

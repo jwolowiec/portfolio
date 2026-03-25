@@ -1,8 +1,8 @@
 import HeroSection from "@/app/(public)/_components/HeroSection";
 import ProjectsSection from "@/app/(public)/_components/projects/ProjectsSection";
-import ExperienceSection from "@/app/(public)/_components/ExperienceSection";
+import ExperienceSection from "@/app/(public)/_components/experience/ExperienceSection";
 import TechnologySection from "@/app/(public)/_components/technology/TechnologySection";
-import AboutMeSection from "@/app/(public)/_components/AboutMeSection";
+import AboutMeSection from "@/app/(public)/_components/about-me/AboutMeSection";
 import ContactSection from "@/app/(public)/_components/ContactSection";
 
 export default function Page() {

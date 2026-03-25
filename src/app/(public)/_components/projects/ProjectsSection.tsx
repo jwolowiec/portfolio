@@ -6,7 +6,7 @@ import ProjectCard from "@/app/(public)/_components/projects/ProjectCard";
 import {LuArrowRight} from "react-icons/lu";
 import BentoContainer from "@/components/ui/BentoContainer";
 import grawerkiCnc from "../../../../../public/grawerki-cnc.png";
-import embeddeSystemsServer from "../../../../../public/embedded-systems-server.png";
+import embeddedSystemsServer from "../../../../../public/embedded-systems-server.png";
 
 const projects = [
     {
@@ -16,7 +16,7 @@ const projects = [
         technologies: ["Node.js", "Express.js", "MongoDB", "Git", "Ubuntu", "Nginx", "Bootstrap"]
     },
     {
-        image: embeddeSystemsServer,
+        image: embeddedSystemsServer,
         name: "System zarządzania kartami RFID",
         url: "https://github.com/jwolowiec/embedded-systems-server",
         technologies: ["Node.js", "Express.js", "MongoDB", "Python", "Git", "SQLite", "Bootstrap"]

@@ -1,23 +1,33 @@
 "use client";
 
-import {itemVariants} from "@/app/(public)/_components/experience/animations";
+import {itemVariants, timelineVariants} from "@/app/(public)/_components/experience/animations";
 import {motion} from "framer-motion";
+import React from "react";
 
 interface TimelineItemProps {
-    index: number
     title: string;
     subtitle: string;
     date: string;
 }
 
-export default function TimelineItem({index, title, subtitle, date}: TimelineItemProps) {
+export function Timeline({children}: {children: React.ReactNode}) {
+    return (
+        <motion.ol
+            variants={timelineVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{once: true, amount: 0.4}}
+            className="flex flex-col gap-4"
+        >
+            {children}
+        </motion.ol>
+    );
+}
+
+export function TimelineItem({title, subtitle, date}: TimelineItemProps) {
     return (
         <motion.li
             variants={itemVariants}
-            custom={index}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{once: true, amount: 0.5}}
             className="flex flex-row items-center gap-4"
         >
             <div

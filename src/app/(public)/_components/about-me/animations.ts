@@ -1,5 +1,5 @@
 import {stagger, Variants} from "framer-motion";
-import {BREAKPOINTS} from "@/constants/breakpoints";
+import {breakpoints} from "@/constants/breakpoints";
 
 export const textContainerVariants: Variants = {
     hidden: {
@@ -21,7 +21,7 @@ export const boxesContainerVariants: Variants = {
 
         if (typeof window !== "undefined") {
             const width = window.innerWidth;
-            isCol = width >= BREAKPOINTS.md && width < BREAKPOINTS.lg;
+            isCol = width >= breakpoints.md && width < breakpoints.lg;
         }
 
         return {

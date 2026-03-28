@@ -1,5 +1,6 @@
 import Header from "@/components/layout/Header";
 import Container from "@/components/ui/Container";
+import Footer from "@/components/layout/Footer";
 
 export default function Layout({
                                    children
@@ -14,7 +15,7 @@ export default function Layout({
                     {children}
                 </Container>
             </main>
-            <footer>Stopka</footer>
+            <Footer />
         </div>
     );
 }

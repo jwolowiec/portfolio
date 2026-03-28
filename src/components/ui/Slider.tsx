@@ -2,23 +2,23 @@
 
 import React, {useEffect, useRef, useState} from "react";
 import {LuChevronLeft, LuChevronRight} from "react-icons/lu";
-import {BREAKPOINTS} from "@/constants/breakpoints";
+import {breakpoints} from "@/constants/breakpoints";
 
-type BreakpointKey = keyof typeof BREAKPOINTS;
+type BreakpointKey = keyof typeof breakpoints;
 
 type Breakpoints = Partial<Record<BreakpointKey, number>>;
 
 interface SliderProps {
     children?: React.ReactNode;
     className?: string;
-    breakpoints?: Breakpoints
+    visibleSlides?: Breakpoints
 }
 
-const sortedKeys = (Object.keys(BREAKPOINTS) as BreakpointKey[]).sort(
-    (a, b) => BREAKPOINTS[b] - BREAKPOINTS[a]
+const sortedKeys = (Object.keys(breakpoints) as BreakpointKey[]).sort(
+    (a, b) => breakpoints[b] - breakpoints[a]
 );
 
-export default function Slider({children, className = "", breakpoints}: SliderProps){
+export default function Slider({children, className = "", visibleSlides}: SliderProps){
     const sliderRef = useRef<HTMLDivElement>(null);
     const [isActive, setIsActive] = useState<number>(0);
     const [currentCols, setCurrentCols] = useState<number>(1);
@@ -29,10 +29,10 @@ export default function Slider({children, className = "", breakpoints}: SliderPr
             const width = window.innerWidth;
 
             const activeKey = sortedKeys.find(key =>
-                breakpoints?.[key] !== undefined && width >= BREAKPOINTS[key]
+                visibleSlides?.[key] !== undefined && width >= breakpoints[key]
             );
 
-            const newCols = activeKey && breakpoints ? breakpoints[activeKey]! : 1;
+            const newCols = activeKey && visibleSlides ? visibleSlides[activeKey]! : 1;
 
             if (newCols !== currentCols) {
                 setCurrentCols(newCols);
@@ -51,7 +51,7 @@ export default function Slider({children, className = "", breakpoints}: SliderPr
 
         window.addEventListener("resize", handleResize);
         return () => window.removeEventListener("resize", handleResize);
-    }, [breakpoints, currentCols, gapSize]);
+    }, [visibleSlides, currentCols, gapSize]);
 
     const childrenLength = React.Children.count(children);
     const slideCount = childrenLength - currentCols + 1;

@@ -11,7 +11,7 @@ export default function ProjectsSection() {
             <div
                 className="h-full"
             >
-                <Slider breakpoints={{lg: 2}} className="gap-3">
+                <Slider visibleSlides={{lg: 2}} className="gap-3">
                     {projects.length === 0 ? (
                         <div className="w-full h-full flex justify-center items-center">
                             <p>Brak projektów</p>

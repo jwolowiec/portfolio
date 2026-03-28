@@ -1,7 +1,7 @@
 'use client';
 
 import BentoContainer from "@/components/ui/BentoContainer";
-import { TECHNOLOGIES } from "@/constants/technologies";
+import { technologies } from "@/constants/technologies";
 import { useState, useEffect } from "react";
 import TechnologyCard from "@/app/(public)/_components/technology/TechnologyCard";
 
@@ -12,7 +12,7 @@ export default function TechnologySection() {
 
     useEffect(() => {
         const interval = setInterval(() => {
-            setIndex((index + 1) % TECHNOLOGIES.length);
+            setIndex((index + 1) % technologies.length);
         }, 15000);
 
         return () => clearInterval(interval);
@@ -24,8 +24,8 @@ export default function TechnologySection() {
                 className="grow grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 justify-center items-center gap-4 h-full w-full"
             >
                 {Array.from({ length: MAX_VISIBLE_CARDS }).map((_, i) => {
-                    const techIndex = (i + index) % TECHNOLOGIES.length;
-                    const technology = TECHNOLOGIES[techIndex];
+                    const techIndex = (i + index) % technologies.length;
+                    const technology = technologies[techIndex];
 
                     return (
                         <TechnologyCard key={i} technology={technology} index={i} />

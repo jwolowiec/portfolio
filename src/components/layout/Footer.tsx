@@ -1,0 +1,119 @@
+import Container from "@/components/ui/Container";
+import {FaChevronRight, FaGithub, FaLinkedin, FaRegCopyright} from "react-icons/fa6";
+import {navLinks} from "@/constants/navigation";
+import {NavLink} from "@/types";
+import BentoContainer from "@/components/ui/BentoContainer";
+import {MdLocationOn, MdMail, MdPerson, MdPhone} from "react-icons/md";
+import {personalInfo} from "@/constants/personalInfo";
+import Link from "next/link";
+import EncodedLink from "@/components/ui/EncodedLink";
+
+// :TODO Make legal routes before add links
+const legalLinks: NavLink[] = [
+    // {name: "Polityka prywatności", href: "/privacy-policy"}
+]
+
+export default function Footer() {
+    return (
+        <footer>
+            <Container className="mt-1 text-neutral-400">
+                <BentoContainer className="flex flex-col gap-6">
+                    <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 px-4">
+                        <div className="flex flex-col">
+                            <h3 className="text-lg mb-2 text-neutral-200">Na skróty</h3>
+                            <nav>
+                                <ol className="flex flex-col gap-2">
+                                    {navLinks.map((link) => {
+                                        return (
+                                            <li key={link.href}>
+                                                <Link
+                                                    href={link.href}
+                                                    className="flex flex-row items-center gap-2"
+                                                >
+                                                    <FaChevronRight className="text-green-400"/>
+                                                    {link.name}
+                                                </Link>
+                                            </li>
+                                        )
+                                    })}
+                                </ol>
+                            </nav>
+                        </div>
+                        <div className="flex flex-col">
+                            <h3 className="text-lg mb-2 text-neutral-200">Dane kontaktowe</h3>
+                            <ol className="flex flex-col">
+                                <li className="flex flex-row items-center gap-2">
+                                    <MdPerson className="text-green-400"/>
+                                    {personalInfo.name} {personalInfo.surname}
+                                </li>
+                                <li className="flex flex-row items-center gap-2">
+                                    <MdPhone className="text-green-400"/>
+                                    <EncodedLink type="phone" encodedText={personalInfo.encodedPhone}/>
+                                </li>
+                                <li className="flex flex-row items-center gap-2">
+                                    <MdMail className="text-green-400"/>
+                                    <EncodedLink type="mail" encodedText={personalInfo.encodedMail}/>
+                                </li>
+                                <li className="flex flex-row items-center gap-2">
+                                    <MdLocationOn className="text-green-400"/>
+                                    {personalInfo.location}
+                                </li>
+                            </ol>
+                        </div>
+                        <div className="flex flex-col">
+                            <h3 className="text-lg mb-2 text-neutral-200">Dowiedz się więcej</h3>
+                            <ol className="flex flex-col">
+                                <li>
+                                    <a
+                                        href={personalInfo.linkedin}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="flex flex-row items-center gap-2"
+                                    >
+                                        <FaLinkedin className="text-green-400"/>
+                                        LinkedIn
+                                    </a>
+                                </li>
+                                <li>
+                                    <a
+                                        href={personalInfo.github}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="flex flex-row items-center gap-2"
+                                    >
+                                        <FaGithub className="text-green-400"/>
+                                        GitHub
+                                    </a>
+                                </li>
+                            </ol>
+                        </div>
+                    </section>
+                    <hr className="border border-neutral-800"/>
+                    <section className="flex flex-col items-center gap-3">
+                        <p className="text-center md:text-left leading-relaxed">
+                            <span className="inline-flex items-center mr-1">
+                                Copyright <FaRegCopyright className="mx-1"/> {new Date().getFullYear()}
+                            </span>
+                            Jakub Wołowiec. Wszelkie prawa zastrzeżone.
+                        </p>
+                        <ol className="flex flex-col sm:flex-row sm:gap-4">
+                            {legalLinks.map((link) => {
+                                return (
+                                    <li key={link.href}>
+                                        <Link
+                                            href={link.href}
+                                            className="flex flex-row items-center gap-2"
+                                        >
+                                            <FaChevronRight className="text-green-400"/>
+                                            {link.name}
+                                        </Link>
+                                    </li>
+                                )
+                            })}
+                        </ol>
+                    </section>
+                </BentoContainer>
+            </Container>
+        </footer>
+    );
+}

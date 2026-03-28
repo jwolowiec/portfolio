@@ -5,12 +5,7 @@ import Link from "next/link";
 import {usePathname} from "next/navigation";
 import {useEffect, useState} from "react";
 import {LuMenu, LuX} from "react-icons/lu";
-
-const navLinks = [
-    {name: "Strona główna", href: "/"},
-    {name: "Projekty", href: "/projects"},
-    {name: "O mnie", href: "/about"},
-];
+import {navLinks} from "@/constants/navigation";
 
 export default function Header() {
     const path = usePathname();

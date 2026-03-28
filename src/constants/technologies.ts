@@ -14,7 +14,7 @@ export interface Technology {
     icon: IconType;
 }
 
-export const TECHNOLOGIES: Technology[] = [
+export const technologies: Technology[] = [
     {name: "Next.js", icon: SiNextdotjs},
     {name: "React", icon: SiReact},
     {name: "Express.js", icon: SiExpress},

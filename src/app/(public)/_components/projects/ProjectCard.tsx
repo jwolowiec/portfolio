@@ -88,14 +88,21 @@ export default function ProjectCard(props: ProjectCardProps) {
                             >
                                 <div className="flex flex-col items-center gap-4 h-full min-h-0 w-full">
                                     <div className="flex flex-row gap-2">
-                                        <Button size="sm" href={props.url}>Odwiedź</Button>
+                                        <Button
+                                            size="sm"
+                                            href={props.url}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                        >
+                                            Odwiedź
+                                        </Button>
                                         <Button variant="secondary" size="sm" href="/projects">Opis</Button>
                                     </div>
                                     <p>Technologie</p>
                                     <div className="flex flex-row justify-center gap-2 flex-wrap">
-                                        {props.technologies.map((technology, index) => {
+                                        {props.technologies.map((technology) => {
                                             return (
-                                                <Pill key={index}>{technology}</Pill>
+                                                <Pill key={technology}>{technology}</Pill>
                                             );
                                         })}
                                     </div>

@@ -9,7 +9,7 @@ import {
     SiPostgresql, SiMongodb, SiExpress, SiNginx, SiLinux
 } from "react-icons/si";
 
-export interface Technology {
+interface Technology {
     name: string;
     icon: IconType;
 }

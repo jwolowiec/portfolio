@@ -68,7 +68,14 @@ export default function Button(props: ButtonProps) {
     const combinedClasses = `${baseStyles} ${customClasses} ${variants[variant]} ${sizes[size]} ${shapeClasses}`;
 
     if (props.href !== undefined) {
-        const { variant: _v, children, className: _c, ...linkProps } = props;
+        const {
+            variant: _v,
+            size: _s,
+            shape: _sh,
+            children,
+            className: _c,
+            ...linkProps
+        } = props;
         return (
             <Link className={combinedClasses} {...linkProps}>
                 {children}
@@ -76,7 +83,14 @@ export default function Button(props: ButtonProps) {
         );
     }
 
-    const { variant: _v, children, className: _c, ...buttonProps } = props;
+    const {
+        variant: _v,
+        size: _s,
+        shape: _sh,
+        children,
+        className: _c,
+        ...buttonProps
+    } = props;
 
     return (
         <button className={combinedClasses} {...buttonProps}>

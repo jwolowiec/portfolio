@@ -27,7 +27,8 @@ export default function Header() {
     return (
         <header className="w-full flex justify-center p-5 fixed z-50">
             <nav
-                className="hidden md:flex bg-neutral-900/80 backdrop-blur-md border border-neutral-800 rounded-full p-2">
+                className="hidden md:flex bg-neutral-900/80 backdrop-blur-md border border-neutral-800 rounded-full p-2"
+            >
                 <ul className="flex gap-3">
                     {navLinks.map((link) => {
                         const isActive = path === link.href;
@@ -44,6 +45,7 @@ export default function Header() {
                                 </Link>
                                 {isActive && (
                                     <motion.div
+                                        style={{originY: '0px'}}
                                         layoutId="active-pill"
                                         className="absolute inset-0 bg-green-500/10 border border-green-500/30 rounded-full"
                                         transition={{duration: 0.2}}

@@ -3,7 +3,7 @@
 import BentoContainer from "@/components/ui/BentoContainer";
 import { technologies } from "@/constants/technologies";
 import { useState, useEffect } from "react";
-import TechnologyCard from "@/app/(public)/_components/technology/TechnologyCard";
+import TechnologyCard from "./TechnologyCard";
 
 const MAX_VISIBLE_CARDS = 8;
 

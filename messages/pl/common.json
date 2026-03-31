@@ -1,0 +1,19 @@
+{
+  "seeMore": "Zobacz więcej",
+  "Links": {
+    "navLinks": {
+      "homePage": "Strona główna",
+      "projects": "Projekty",
+      "aboutMe": "O mnie"
+    },
+    "legalLinks": {
+      "privacyPolicy": "Polityka prywatności"
+    }
+  },
+  "Footer": {
+    "shortcuts": "Na skróty",
+    "contactData": "Dane kontaktowe",
+    "findMore": "Dowiedz się więcej",
+    "allRightsReserved": "Wszelkie prawa zastrzeżone."
+  }
+}

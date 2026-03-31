@@ -2,7 +2,7 @@
 
 import {IconType} from "react-icons";
 import {motion} from "framer-motion";
-import {boxVariants} from "@/app/(public)/_components/about-me/animations";
+import {boxVariants} from "./animations";
 
 interface AboutMeTileProps {
     text: string;

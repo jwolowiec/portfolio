@@ -1,0 +1,47 @@
+{
+  "ProjectSection": {
+    "header": "Projects",
+    "empty": "No projects",
+    "ProjectCard": {
+      "screenShot": "Screenshot",
+      "visitButton": "Visit",
+      "projectDescriptionButton": "Description",
+      "technologies": "Technologies"
+    }
+  },
+  "AboutMeSection": {
+    "design": "<plain>I create </plain><highlight>designs</highlight><plain>.</plain>",
+    "code": "<plain>I write </plain><highlight>code</highlight><plain>.</plain>",
+    "deploy": "<plain>I deploy </plain><highlight>apps</highlight><plain>.</plain>",
+    "tiles": {
+      "location": "Poznań / Remote",
+      "webApps": "Web Applications",
+      "role": "Fullstack Developer"
+    }
+  },
+  "ExperienceSection": {
+    "header": "Experience",
+    "items": {
+      "freelancer": {
+        "date": "2025 - Present",
+        "title": "Freelance Web Developer",
+        "subtitle": "Delivering commercial projects"
+      },
+      "university": {
+        "date": "2023 - Present",
+        "title": "Poznań University of Technology",
+        "subtitle": "Computer Science"
+      },
+      "school": {
+        "date": "2018 - 2022",
+        "title": "SCI IT Technical School",
+        "subtitle": "IT Technician"
+      }
+    }
+  },
+  "ContactSection": {
+    "header": "<plain>Interested in </plain><highlight>working together</highlight><plain>?</plain>",
+    "paragraph": "Do you need a <highlight>developer</highlight> or a <highlight>website</highlight>? Contact me.",
+    "messageButton": "Send a message"
+  }
+}

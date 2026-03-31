@@ -1,0 +1,19 @@
+{
+  "seeMore": "See more",
+  "Links": {
+    "navLinks": {
+      "homePage": "Home",
+      "projects": "Projects",
+      "aboutMe": "About me"
+    },
+    "legalLinks": {
+      "privacyPolicy": "Privacy Policy"
+    }
+  },
+  "Footer": {
+    "shortcuts": "Quick links",
+    "contactData": "Contact info",
+    "findMore": "Find out more",
+    "allRightsReserved": "All rights reserved."
+  }
+}

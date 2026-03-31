@@ -5,22 +5,26 @@ import {NavLink} from "@/types";
 import BentoContainer from "@/components/ui/BentoContainer";
 import {MdLocationOn, MdMail, MdPerson, MdPhone} from "react-icons/md";
 import {personalInfo} from "@/constants/personalInfo";
-import Link from "next/link";
+import {Link} from "@/i18n/navigation";
 import EncodedLink from "@/components/ui/EncodedLink";
+import {useTranslations} from "next-intl";
 
 // :TODO Make legal routes before add links
 const legalLinks: NavLink[] = [
-    // {name: "Polityka prywatności", href: "/privacy-policy"}
+    // {name: "privacyPolicy", href: "/privacy-policy"}
 ]
 
 export default function Footer() {
+    const linksT = useTranslations("common.Links");
+    const t = useTranslations("common.Footer");
+
     return (
         <footer>
             <Container className="mt-1 text-neutral-400">
                 <BentoContainer className="flex flex-col gap-6">
                     <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 px-4">
                         <div className="flex flex-col">
-                            <h3 className="text-lg mb-2 text-neutral-200">Na skróty</h3>
+                            <h3 className="text-lg mb-2 text-neutral-200">{t("shortcuts")}</h3>
                             <nav>
                                 <ol className="flex flex-col gap-2">
                                     {navLinks.map((link) => {
@@ -31,7 +35,7 @@ export default function Footer() {
                                                     className="flex flex-row items-center gap-2"
                                                 >
                                                     <FaChevronRight className="text-green-400"/>
-                                                    {link.name}
+                                                    {linksT(`navLinks.${link.name}`)}
                                                 </Link>
                                             </li>
                                         )
@@ -40,7 +44,7 @@ export default function Footer() {
                             </nav>
                         </div>
                         <div className="flex flex-col">
-                            <h3 className="text-lg mb-2 text-neutral-200">Dane kontaktowe</h3>
+                            <h3 className="text-lg mb-2 text-neutral-200">{t("contactData")}</h3>
                             <ol className="flex flex-col">
                                 <li className="flex flex-row items-center gap-2">
                                     <MdPerson className="text-green-400"/>
@@ -61,7 +65,7 @@ export default function Footer() {
                             </ol>
                         </div>
                         <div className="flex flex-col">
-                            <h3 className="text-lg mb-2 text-neutral-200">Dowiedz się więcej</h3>
+                            <h3 className="text-lg mb-2 text-neutral-200">{t("findMore")}</h3>
                             <ol className="flex flex-col">
                                 <li>
                                     <a
@@ -94,7 +98,7 @@ export default function Footer() {
                             <span className="inline-flex items-center mr-1">
                                 Copyright <FaRegCopyright className="mx-1"/> {new Date().getFullYear()}
                             </span>
-                            Jakub Wołowiec. Wszelkie prawa zastrzeżone.
+                            Jakub Wołowiec. {t("allRightsReserved")}
                         </p>
                         <ol className="flex flex-col sm:flex-row sm:gap-4">
                             {legalLinks.map((link) => {
@@ -105,7 +109,7 @@ export default function Footer() {
                                             className="flex flex-row items-center gap-2"
                                         >
                                             <FaChevronRight className="text-green-400"/>
-                                            {link.name}
+                                            {linksT(`legalLinks.${link.name}`)}
                                         </Link>
                                     </li>
                                 )

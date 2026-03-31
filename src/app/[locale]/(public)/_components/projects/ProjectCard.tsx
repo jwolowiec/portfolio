@@ -6,7 +6,8 @@ import Pill from "@/components/ui/Pill";
 import {LuChevronUp} from "react-icons/lu";
 import {useState} from "react";
 import {AnimatePresence, motion} from "framer-motion";
-import {containerVariants} from "@/app/(public)/_components/projects/animations";
+import {containerVariants} from "./animations";
+import {useTranslations} from "next-intl";
 
 interface ProjectCardProps {
     image: StaticImageData;
@@ -18,6 +19,8 @@ interface ProjectCardProps {
 
 export default function ProjectCard(props: ProjectCardProps) {
     const [isExpanded, setIsExpanded] = useState<boolean>(false);
+    const t = useTranslations("homePage.ProjectSection.ProjectCard");
+
     return (
         <motion.div
             variants={containerVariants}
@@ -32,7 +35,7 @@ export default function ProjectCard(props: ProjectCardProps) {
         >
             <Image
                 src={props.image}
-                alt={`Zrzut ekranu: ${props.name}`}
+                alt={`${t("screenShot")}: ${props.name}`}
                 className="grow object-cover rounded-xl"
                 loading="eager"
             />
@@ -94,11 +97,17 @@ export default function ProjectCard(props: ProjectCardProps) {
                                             target="_blank"
                                             rel="noopener noreferrer"
                                         >
-                                            Odwiedź
+                                            {t("visitButton")}
                                         </Button>
-                                        <Button variant="secondary" size="sm" href="/projects">Opis</Button>
+                                        <Button
+                                            variant="secondary"
+                                            size="sm"
+                                            href="/projects"
+                                        >
+                                            {t("projectDescriptionButton")}
+                                        </Button>
                                     </div>
-                                    <p>Technologie</p>
+                                    <p>{t("technologies")}</p>
                                     <div className="flex flex-row justify-center gap-2 flex-wrap">
                                         {props.technologies.map((technology) => {
                                             return (

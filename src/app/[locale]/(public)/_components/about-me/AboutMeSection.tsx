@@ -3,11 +3,14 @@
 import BentoContainer from "@/components/ui/BentoContainer";
 import {motion} from "framer-motion";
 import TypeWriter from "@/components/ui/TypeWriter";
-import {tiles} from "@/app/(public)/_components/about-me/data";
-import {boxesContainerVariants, textContainerVariants} from "@/app/(public)/_components/about-me/animations";
-import AboutMeTile from "@/app/(public)/_components/about-me/AboutMeTile";
+import {tiles} from "./data";
+import {boxesContainerVariants, textContainerVariants} from "./animations";
+import AboutMeTile from "./AboutMeTile";
+import {useTranslations} from "next-intl";
 
 export default function AboutMeSection() {
+    const t = useTranslations("homePage.AboutMeSection");
+
     return (
         <BentoContainer
             className="col-span-full md:col-span-2 lg:col-span-3 row-span-2 flex flex-col gap-4 justify-between">
@@ -19,19 +22,22 @@ export default function AboutMeSection() {
                 className="flex flex-col gap-3 text-3xl lg:text-4xl font-extrabold text-neutral-200"
             >
                 <p>
-                    <TypeWriter text={"Projektuję "}/>
-                    <TypeWriter text={"design"} className="text-green-400"/>
-                    <TypeWriter text={"."}/>
+                    {t.rich("design", {
+                        plain: (chunk) => <TypeWriter text={String(chunk)} />,
+                        highlight: (chunk) => <TypeWriter text={String(chunk)} className="text-green-400" />
+                    })}
                 </p>
                 <p>
-                    <TypeWriter text={"Piszę "}/>
-                    <TypeWriter text={"kod"} className="text-green-400"/>
-                    <TypeWriter text={"."}/>
+                    {t.rich("code", {
+                        plain: (chunk) => <TypeWriter text={String(chunk)} />,
+                        highlight: (chunk) => <TypeWriter text={String(chunk)} className="text-green-400" />
+                    })}
                 </p>
                 <p>
-                    <TypeWriter text={"Wdrażam "}/>
-                    <TypeWriter text={"aplikacje"} className="text-green-400"/>
-                    <TypeWriter text={"."}/>
+                    {t.rich("deploy", {
+                        plain: (chunk) => <TypeWriter text={String(chunk)} />,
+                        highlight: (chunk) => <TypeWriter text={String(chunk)} className="text-green-400" />
+                    })}
                 </p>
             </motion.div>
 
@@ -44,7 +50,12 @@ export default function AboutMeSection() {
             >
                 {tiles.map((tile) => {
                     return (
-                        <AboutMeTile key={tile.text} text={tile.text} Icon={tile.icon} classes={tile.classes} />
+                        <AboutMeTile
+                            key={tile.translationKey}
+                            text={t(`tiles.${tile.translationKey}`)}
+                            Icon={tile.icon}
+                            classes={tile.classes}
+                        />
                     );
                 })}
             </motion.div>

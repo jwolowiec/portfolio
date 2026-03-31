@@ -1,15 +1,16 @@
 "use client";
 
 import {AnimatePresence, motion} from "framer-motion";
-import Link from "next/link";
-import {usePathname} from "next/navigation";
+import {Link, usePathname} from "@/i18n/navigation";
 import {useEffect, useState} from "react";
 import {LuMenu, LuX} from "react-icons/lu";
 import {navLinks} from "@/constants/navigation";
+import {useTranslations} from "next-intl";
 
 export default function Header() {
     const path = usePathname();
     const [isOpen, setIsOpen] = useState(false);
+    const navLinksT = useTranslations("common.Links.navLinks");
 
     useEffect(() => {
         if (isOpen) {
@@ -34,9 +35,13 @@ export default function Header() {
                         return (
                             <li key={link.href}
                                 className="relative px-5 py-1 rounded-full">
-                                <Link href={link.href} className={`relative z-10 transition-colors ${
-                                    isActive ? "text-green-400" : "text-neutral-400 hover:text-white"
-                                }`}>{link.name}</Link>
+                                <Link
+                                    href={link.href}
+                                    className={`relative z-10 transition-colors 
+                                        ${isActive ? "text-green-400" : "text-neutral-400 hover:text-white"}`}
+                                >
+                                    {navLinksT(`${link.name}`)}
+                                </Link>
                                 {isActive && (
                                     <motion.div
                                         layoutId="active-pill"
@@ -82,7 +87,9 @@ export default function Header() {
                                                 onClick={() => setIsOpen(false)}
                                                 href={link.href}
                                                 className="block w-full h-full"
-                                            >{link.name}</Link>
+                                            >
+                                                {navLinksT(`${link.name}`)}
+                                            </Link>
                                         </motion.li>
                                     );
                                 })}

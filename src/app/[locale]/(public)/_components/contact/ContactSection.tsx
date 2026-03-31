@@ -7,12 +7,15 @@ import {
     containerVariants,
     paragraphVariants,
     textWritingVariants
-} from "@/app/(public)/_components/contact/animations";
+} from "./animations";
 import TypeWriter from "@/components/ui/TypeWriter";
 import Button from "@/components/ui/Button";
 import {FaEnvelope, FaGithub, FaLinkedin} from "react-icons/fa6";
+import {useTranslations} from "next-intl";
 
 export default function ContactSection() {
+    const t = useTranslations("homePage.ContactSection");
+
     return (
         <BentoContainer className="col-span-full md:col-span-4 lg:col-span-5 row-span-2 flex flex-col">
             <motion.div
@@ -26,16 +29,18 @@ export default function ContactSection() {
                     variants={textWritingVariants}
                     className="text-4xl md:text-5xl lg:text-5xl font-extrabold"
                 >
-                    <TypeWriter text={"Zainteresowany "}/>
-                    <TypeWriter text={"współpracą"} className="text-green-400"/>
-                    <TypeWriter text={"?"}/>
+                    {t.rich("header", {
+                        plain: (chunk) => <TypeWriter text={String(chunk)} />,
+                        highlight: (chunk) => <TypeWriter text={String(chunk)} className="text-green-400" />
+                    })}
                 </motion.h2>
                 <motion.p
                     variants={paragraphVariants}
                     className="text-lg md:text-xl font-bold"
                 >
-                    Potrzebujesz <span className="text-green-400">dewelopera</span> albo <span
-                    className="text-green-400">strony internetowej</span>? Skontaktuj się ze mną.
+                    {t.rich("paragraph", {
+                        highlight: (chunk) => <span className="text-green-400">{chunk}</span>
+                    })}
                 </motion.p>
                 <motion.div
                     variants={buttonContainerVariants}
@@ -49,7 +54,7 @@ export default function ContactSection() {
                             size="xl"
                             className="flex flex-row gap-2"
                         >
-                            <span><FaEnvelope/></span>Napisz do mnie
+                            <span><FaEnvelope/></span>{t("messageButton")}
                         </Button>
                     </motion.div>
                     <div className="flex flex-row gap-3">

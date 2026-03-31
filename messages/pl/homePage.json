@@ -1,0 +1,47 @@
+{
+  "ProjectSection": {
+    "header": "Projekty",
+    "empty": "Brak projektów",
+    "ProjectCard": {
+      "screenShot": "Zrzut ekranu",
+      "visitButton": "Odwiedź",
+      "projectDescriptionButton": "Opis",
+      "technologies": "Technologie"
+    }
+  },
+  "AboutMeSection": {
+    "design": "<plain>Projektuję </plain><highlight>design</highlight><plain>.</plain>",
+    "code": "<plain>Piszę </plain><highlight>kod</highlight><plain>.</plain>",
+    "deploy": "<plain>Wdrażam </plain><highlight>aplikacje</highlight><plain>.</plain>",
+    "tiles": {
+      "location": "Poznań/Zdalnie",
+      "webApps": "Aplikacje Webowe",
+      "role": "Fullstack Developer"
+    }
+  },
+  "ExperienceSection": {
+    "header": "Doświadczenie",
+    "items": {
+      "freelancer": {
+        "date": "2025 - Obecnie",
+        "title": "Freelance Web Developer",
+        "subtitle": "Realizacja projektów komercyjnych"
+      },
+      "university": {
+        "date": "2023 - Obecnie",
+        "title": "Politechnika Poznańska",
+        "subtitle": "Informatyka"
+      },
+      "school": {
+        "date": "2018 - 2022",
+        "title": "Technikum Informatyczne SCI",
+        "subtitle": "Technik Informatyk"
+      }
+    }
+  },
+  "ContactSection": {
+    "header": "<plain>Zainteresowany </plain><highlight>współpracą</highlight><plain>?</plain>",
+    "paragraph": "Potrzebujesz <highlight>dewelopera</highlight> albo <highlight>strony internetowej</highlight>? Skontaktuj się ze mną.",
+    "messageButton": "Napisz do mnie"
+  }
+}

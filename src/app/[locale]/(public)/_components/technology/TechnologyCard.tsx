@@ -2,7 +2,7 @@
 
 import { AnimatePresence, motion } from "framer-motion";
 import { IconType } from "react-icons";
-import {itemVariants} from "@/app/(public)/_components/technology/animations";
+import {itemVariants} from "./animations";
 
 export interface Technology {
     name: string;

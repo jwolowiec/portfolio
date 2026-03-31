@@ -1,6 +1,6 @@
 "use client";
 
-import {itemVariants, timelineVariants} from "@/app/(public)/_components/experience/animations";
+import {itemVariants, timelineVariants} from "./animations";
 import {motion} from "framer-motion";
 import React from "react";
 

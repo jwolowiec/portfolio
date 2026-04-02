@@ -5,12 +5,16 @@ import {Link, usePathname} from "@/i18n/navigation";
 import {useEffect, useState} from "react";
 import {LuMenu, LuX} from "react-icons/lu";
 import {navLinks} from "@/constants/navigation";
-import {useTranslations} from "next-intl";
+import {useLocale, useTranslations} from "next-intl";
+import {locales} from "@/constants/locales";
+import Container from "@/components/ui/Container";
 
 export default function Header() {
+    const currentLocale = useLocale();
     const path = usePathname();
     const [isOpen, setIsOpen] = useState(false);
     const navLinksT = useTranslations("common.Links.navLinks");
+    const localesT = useTranslations("common.Locales");
 
     useEffect(() => {
         if (isOpen) {
@@ -25,37 +29,58 @@ export default function Header() {
     }, [isOpen]);
 
     return (
-        <header className="w-full flex justify-center p-5 fixed z-50">
-            <nav
-                className="hidden md:flex bg-neutral-900/80 backdrop-blur-md border border-neutral-800 rounded-full p-2"
+        <header className="w-full flex flex-row justify-center p-2 fixed z-50">
+            <Container
+                className="hidden md:block"
             >
-                <ul className="flex gap-3">
-                    {navLinks.map((link) => {
-                        const isActive = path === link.href;
+                <nav className="p-2 grid grid-cols-[1fr_auto_1fr] items-center rounded-4xl bg-neutral-900/80 backdrop-blur-md border border-neutral-800">
+                    <div></div>
+                    <ul className="flex items-center bg-neutral-900/80 backdrop-blur-md border border-neutral-800 rounded-3xl p-2 gap-3">
+                        {navLinks.map((link) => {
+                            const isActive = path === link.href;
 
-                        return (
-                            <li key={link.href}
-                                className="relative px-5 py-1 rounded-full">
-                                <Link
-                                    href={link.href}
-                                    className={`relative z-10 transition-colors 
+                            return (
+                                <li key={link.href}
+                                    className="relative px-5 py-1">
+                                    <Link
+                                        href={link.href}
+                                        className={`relative z-10 transition-colors 
                                         ${isActive ? "text-green-400" : "text-neutral-400 hover:text-white"}`}
-                                >
-                                    {navLinksT(`${link.name}`)}
-                                </Link>
-                                {isActive && (
-                                    <motion.div
-                                        style={{originY: '0px'}}
-                                        layoutId="active-pill"
-                                        className="absolute inset-0 bg-green-500/10 border border-green-500/30 rounded-full"
-                                        transition={{duration: 0.2}}
-                                    />
-                                )}
-                            </li>
-                        );
-                    })}
-                </ul>
-            </nav>
+                                    >
+                                        {navLinksT(`${link.name}`)}
+                                    </Link>
+                                    {isActive && (
+                                        <motion.div
+                                            style={{originY: '0px'}}
+                                            layoutId="active-pill"
+                                            className="absolute inset-0 bg-green-500/10 border border-green-500/30 rounded-2xl"
+                                            transition={{duration: 0.2}}
+                                        />
+                                    )}
+                                </li>
+                            );
+                        })}
+                    </ul>
+                    <div className="flex justify-end">
+                        <ul className="flex-shrink flex flex-row items-center bg-neutral-900/80 backdrop-blur-md border border-neutral-800 rounded-3xl px-5 gap-3">
+                            {locales.map((locale) => {
+                                const current = locale === currentLocale;
+                                return (
+                                    <li key={locale} className="py-3">
+                                        <Link
+                                            href={path}
+                                            locale={locale}
+                                            className={`${current ? "text-green-400" : "text-neutral-400 hover:text-white"}`}
+                                        >
+                                            {localesT(`${locale}.shortcut`)}
+                                        </Link>
+                                    </li>
+                                );
+                            })}
+                        </ul>
+                    </div>
+                </nav>
+            </Container>
             <div className="md:hidden fixed right-5 top-5 z-50">
                 <button
                     onClick={() => setIsOpen(!isOpen)}
@@ -79,12 +104,12 @@ export default function Header() {
 
                                     return (
                                         <motion.li key={link.href}
-                                                   initial={{ y: -50, opacity: 0 }}
-                                                   animate={{ y: 0, opacity: 1 }}
-                                                   exit={{ y: -20, opacity: 0 }}
+                                                   initial={{y: -50, opacity: 0}}
+                                                   animate={{y: 0, opacity: 1}}
+                                                   exit={{y: -20, opacity: 0}}
                                                    transition={{duration: 0.4, ease: "easeInOut", delay: index * 0.1}}
-                                                   className={`px-5 py-1 rounded-full z-10 text-xl text-center ${
-                                                        isActive ? "text-green-400 bg-green-500/10 border border-green-500/30" : "text-neutral-400 hover:text-white"}`}>
+                                                   className={`px-5 py-1 rounded-3xl z-10 text-xl text-center ${
+                                                       isActive ? "text-green-400 bg-green-500/10 border border-green-500/30" : "text-neutral-400 hover:text-white"}`}>
                                             <Link
                                                 onClick={() => setIsOpen(false)}
                                                 href={link.href}
@@ -103,7 +128,9 @@ export default function Header() {
                             exit={{opacity: 0}}
                             transition={{duration: 0.4, ease: "easeInOut"}}
                             className="backdrop-blur-xs grow w-full h-full"
-                            onClick={() => {setIsOpen(false)}}
+                            onClick={() => {
+                                setIsOpen(false)
+                            }}
                         />
                     </div>
                 )}

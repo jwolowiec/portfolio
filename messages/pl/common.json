@@ -1,5 +1,15 @@
 {
   "seeMore": "Zobacz więcej",
+  "Locales": {
+    "pl": {
+      "name": "Polski",
+      "shortcut": "PLN"
+    },
+    "en": {
+      "name": "Angielski",
+      "shortcut": "ENG"
+    }
+  },
   "Links": {
     "navLinks": {
       "homePage": "Strona główna",

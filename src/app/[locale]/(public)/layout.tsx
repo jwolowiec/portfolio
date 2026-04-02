@@ -1,6 +1,6 @@
 import Header from "@/components/layout/Header";
 import Container from "@/components/ui/Container";
-import Footer from "@/components/layout/Footer";
+import Footer from "@/components/layout/footer/Footer";
 
 export default function Layout({
                                    children

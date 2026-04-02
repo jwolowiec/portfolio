@@ -8,6 +8,8 @@ import {personalInfo} from "@/constants/personalInfo";
 import {Link} from "@/i18n/navigation";
 import EncodedLink from "@/components/ui/EncodedLink";
 import {useTranslations} from "next-intl";
+import LocalesList from "@/components/layout/footer/LocalesList";
+import FooterColumn from "@/components/layout/footer/FooterColumn";
 
 // :TODO Make legal routes before add links
 const legalLinks: NavLink[] = [
@@ -23,10 +25,9 @@ export default function Footer() {
             <Container className="mt-1 text-neutral-400">
                 <BentoContainer className="flex flex-col gap-6">
                     <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 px-4">
-                        <div className="flex flex-col">
-                            <h3 className="text-lg mb-2 text-neutral-200">{t("shortcuts")}</h3>
+                        <FooterColumn title={t("shortcuts")}>
                             <nav>
-                                <ol className="flex flex-col gap-2">
+                                <ul className="flex flex-col gap-2">
                                     {navLinks.map((link) => {
                                         return (
                                             <li key={link.href}>
@@ -40,12 +41,11 @@ export default function Footer() {
                                             </li>
                                         )
                                     })}
-                                </ol>
+                                </ul>
                             </nav>
-                        </div>
-                        <div className="flex flex-col">
-                            <h3 className="text-lg mb-2 text-neutral-200">{t("contactData")}</h3>
-                            <ol className="flex flex-col">
+                        </FooterColumn>
+                        <FooterColumn title={t("contactData")}>
+                            <ul className="flex flex-col">
                                 <li className="flex flex-row items-center gap-2">
                                     <MdPerson className="text-green-400"/>
                                     {personalInfo.name} {personalInfo.surname}
@@ -62,11 +62,10 @@ export default function Footer() {
                                     <MdLocationOn className="text-green-400"/>
                                     {personalInfo.location}
                                 </li>
-                            </ol>
-                        </div>
-                        <div className="flex flex-col">
-                            <h3 className="text-lg mb-2 text-neutral-200">{t("findMore")}</h3>
-                            <ol className="flex flex-col">
+                            </ul>
+                        </FooterColumn>
+                        <FooterColumn title={t("findMore")}>
+                            <ul className="flex flex-col">
                                 <li>
                                     <a
                                         href={personalInfo.linkedin}
@@ -89,8 +88,8 @@ export default function Footer() {
                                         GitHub
                                     </a>
                                 </li>
-                            </ol>
-                        </div>
+                            </ul>
+                        </FooterColumn>
                     </section>
                     <hr className="border border-neutral-800"/>
                     <section className="flex flex-col items-center gap-3">
@@ -100,7 +99,7 @@ export default function Footer() {
                             </span>
                             Jakub Wołowiec. {t("allRightsReserved")}
                         </p>
-                        <ol className="flex flex-col sm:flex-row sm:gap-4">
+                        <ul className="flex flex-col sm:flex-row sm:gap-4">
                             {legalLinks.map((link) => {
                                 return (
                                     <li key={link.href}>
@@ -114,7 +113,8 @@ export default function Footer() {
                                     </li>
                                 )
                             })}
-                        </ol>
+                        </ul>
+                        <LocalesList />
                     </section>
                 </BentoContainer>
             </Container>

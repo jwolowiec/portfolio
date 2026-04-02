@@ -1,6 +1,6 @@
 "use client";
 
-import {AnimatePresence, motion} from "framer-motion";
+import {AnimatePresence, motion, stagger, Variants} from "framer-motion";
 import {Link, usePathname} from "@/i18n/navigation";
 import {useEffect, useState} from "react";
 import {LuMenu, LuX} from "react-icons/lu";
@@ -8,6 +8,35 @@ import {navLinks} from "@/constants/navigation";
 import {useLocale, useTranslations} from "next-intl";
 import {locales} from "@/constants/locales";
 import Container from "@/components/ui/Container";
+
+const containerVariants: Variants = {
+    hidden: {
+        opacity: 0
+    },
+    visible: {
+        opacity: 1,
+        transition: {
+            duration: 0.4,
+            ease: "easeInOut",
+            delayChildren: stagger(0.1)
+        }
+    }
+}
+
+const itemVariants: Variants = {
+    hidden: {
+        y: -50,
+        opacity: 0
+    },
+    visible: {
+        y: 0,
+        opacity: 1,
+        transition: {
+            duration: 0.4,
+            ease: "easeInOut",
+        }
+    }
+};
 
 export default function Header() {
     const currentLocale = useLocale();
@@ -93,23 +122,22 @@ export default function Header() {
                 {isOpen && (
                     <div className="fixed inset-0 flex flex-col">
                         <motion.nav
-                            initial={{opacity: 0}}
-                            animate={{opacity: 1}}
-                            exit={{opacity: 0}}
-                            transition={{duration: 0.4, ease: "easeInOut"}}
+                            variants={containerVariants}
+                            initial="hidden"
+                            animate="visible"
+                            exit="hidden"
                             className="absolute z-9 w-full h-1/2 bg-neutral-900 border border-neutral-800 rounded-b-2xl flex flex-col justify-center p-4">
-                            <ul className="flex flex-col gap-5">
-                                {navLinks.map((link, index) => {
+                            <ul className="flex flex-col gap-5 text-xl text-center">
+                                {navLinks.map((link) => {
                                     const isActive = path === link.href;
 
                                     return (
-                                        <motion.li key={link.href}
-                                                   initial={{y: -50, opacity: 0}}
-                                                   animate={{y: 0, opacity: 1}}
-                                                   exit={{y: -20, opacity: 0}}
-                                                   transition={{duration: 0.4, ease: "easeInOut", delay: index * 0.1}}
-                                                   className={`px-5 py-1 rounded-3xl z-10 text-xl text-center ${
-                                                       isActive ? "text-green-400 bg-green-500/10 border border-green-500/30" : "text-neutral-400 hover:text-white"}`}>
+                                        <motion.li
+                                            key={link.href}
+                                            variants={itemVariants}
+                                            className={`px-5 py-2 rounded-3xl z-10 ${
+                                                isActive ? "text-green-400 bg-green-500/10 border border-green-500/30" : "text-neutral-400 hover:text-white"}`}
+                                        >
                                             <Link
                                                 onClick={() => setIsOpen(false)}
                                                 href={link.href}
@@ -120,6 +148,24 @@ export default function Header() {
                                         </motion.li>
                                     );
                                 })}
+                                <motion.li
+                                    variants={itemVariants}
+                                    className="flex flex-row justify-center divide-x divide-neutral-500"
+                                >
+                                    {locales.map((locale) => {
+                                        const current = locale === currentLocale;
+                                        return (
+                                            <Link
+                                                key={locale}
+                                                href={path}
+                                                locale={locale}
+                                                className={`text-base px-4 ${current ? "text-green-400" : "text-neutral-400 hover:text-white"}`}
+                                            >
+                                                {localesT(`${locale}.shortcut`)}
+                                            </Link>
+                                        );
+                                    })}
+                                </motion.li>
                             </ul>
                         </motion.nav>
                         <motion.div

@@ -2,7 +2,7 @@ import Slider from "@/components/ui/Slider";
 import ProjectCard from "./ProjectCard";
 import {LuArrowRight} from "react-icons/lu";
 import BentoContainer from "@/components/ui/BentoContainer";
-import {projects} from "./data";
+import {projects} from "../../../../../constants/projects";
 import {Link} from "@/i18n/navigation";
 import {useTranslations} from "next-intl";
 
@@ -34,7 +34,7 @@ export default function ProjectsSection() {
                         )
                     })}
                     <div className="w-full h-full flex flex-row justify-center items-center">
-                        <Link href="/projects" className="flex flex-col items-center gap-2">
+                        <Link href="/src/constants/projects" className="flex flex-col items-center gap-2">
                             <div
                                 className="w-12 h-12 flex flex-row justify-center items-center rounded-full border border-green-500/30 text-green-400 hover:scale-110 transition-all">
                                 <LuArrowRight/>

@@ -13,7 +13,7 @@ export default function Page({params}: {params: Promise<{locale: string}>}) {
     setRequestLocale(locale);
 
     return (
-        <div className="grid grid-cols-2 md:grid-cols-6 lg:grid-cols-8 gap-5 auto-rows-[minmax(12rem,auto)]">
+        <>
             <HeroSection />
 
             <ProjectsSection />
@@ -25,6 +25,6 @@ export default function Page({params}: {params: Promise<{locale: string}>}) {
             <ExperienceSection />
 
             <ContactSection />
-        </div>
+        </>
     );
 }

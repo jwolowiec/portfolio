@@ -1,5 +1,11 @@
 {
   "seeMore": "See more",
+  "buttons": {
+    "submit": "Submit",
+    "cancel": "Cancel",
+    "save": "Save",
+    "delete": "Delete"
+  },
   "Locales": {
     "pl": {
       "name": "Polish",

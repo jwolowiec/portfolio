@@ -42,6 +42,7 @@
   "ContactSection": {
     "header": "<plain>Zainteresowany </plain><highlight>współpracą</highlight><plain>?</plain>",
     "paragraph": "Potrzebujesz <highlight>dewelopera</highlight> albo <highlight>strony internetowej</highlight>? Skontaktuj się ze mną.",
-    "messageButton": "Napisz do mnie"
+    "messageButton": "Napisz do mnie",
+    "contactFormLabel": "Formularz kontaktowy"
   }
 }

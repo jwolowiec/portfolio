@@ -42,6 +42,7 @@
   "ContactSection": {
     "header": "<plain>Interested in </plain><highlight>working together</highlight><plain>?</plain>",
     "paragraph": "Do you need a <highlight>developer</highlight> or a <highlight>website</highlight>? Contact me.",
-    "messageButton": "Send a message"
+    "messageButton": "Send a message",
+    "contactFormLabel": "Contact form"
   }
 }

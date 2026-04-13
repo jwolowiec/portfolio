@@ -1,7 +1,7 @@
 "use client";
 
 import Image, {StaticImageData} from "next/image";
-import Button from "@/components/ui/Button";
+import Button from "@/components/ui/button/Button";
 import Pill from "@/components/ui/Pill";
 import {LuChevronUp} from "react-icons/lu";
 import {useState} from "react";

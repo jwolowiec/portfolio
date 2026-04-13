@@ -1,0 +1,21 @@
+{
+  "contact": {
+    "label": {
+      "email": "Email",
+      "subject": "Subject",
+      "content": "Message content"
+    },
+    "hint": {
+      "subject": "Maximum {number} characters",
+      "content": "Maximum {number} characters"
+    },
+    "error": {
+      "missingEmail": "Email address is required",
+      "invalidEmail": "Enter a valid email address",
+      "shortSubject": "Subject is required",
+      "longSubject": "Subject cannot exceed {number} characters",
+      "shortContent": "Message is required",
+      "longContent": "Message cannot exceed {number} characters"
+    }
+  }
+}

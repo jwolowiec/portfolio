@@ -4,7 +4,7 @@ import {Project} from "@/types/project";
 import Image from "next/image";
 import BentoContainer from "@/components/ui/BentoContainer";
 import Pill from "@/components/ui/Pill";
-import Button from "@/components/ui/Button";
+import Button from "@/components/ui/button";
 import {FaChevronRight} from "react-icons/fa6";
 import {FaExternalLinkAlt, FaInfoCircle} from "react-icons/fa";
 import {useTranslations} from "next-intl";

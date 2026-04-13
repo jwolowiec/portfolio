@@ -1,0 +1,21 @@
+{
+  "contact": {
+    "label": {
+      "email": "E-mail",
+      "subject": "Temat wiadomości",
+      "content": "Treść wiadomości"
+    },
+    "hint": {
+      "subject": "Maksymalnie {number} znaków",
+      "content": "Maksymalnie {number} znaków"
+    },
+    "error": {
+      "missingEmail": "Adres e-mail jest wymagany",
+      "invalidEmail": "Wpisz poprawny adres e-mail",
+      "shortSubject": "Temat jest wymagany",
+      "longSubject": "Temat nie może przekraczać {number} znaków",
+      "shortContent": "Wiadomość jest wymagana",
+      "longContent": "Wiadomość nie może przekraczać {number} znaków"
+    }
+  }
+}

@@ -9,12 +9,16 @@ import {
     textWritingVariants
 } from "./animations";
 import TypeWriter from "@/components/ui/TypeWriter";
-import Button from "@/components/ui/Button";
+import Button from "@/components/ui/button";
 import {FaEnvelope, FaGithub, FaLinkedin} from "react-icons/fa6";
 import {useTranslations} from "next-intl";
+import FullscreenModal from "@/components/ui/FullscreenModal";
+import {useState} from "react";
+import ContactForm from "@/components/features/ContactForm";
 
 export default function ContactSection() {
     const t = useTranslations("homePage.ContactSection");
+    const [isOpen, setIsOpen] = useState<boolean>(false);
 
     return (
         <BentoContainer className="col-span-full md:col-span-4 lg:col-span-5 row-span-2 flex flex-col">
@@ -53,9 +57,22 @@ export default function ContactSection() {
                             href="#"
                             size="xl"
                             className="flex flex-row gap-2"
+                            onClick={() => {setIsOpen(true)}}
                         >
                             <span><FaEnvelope/></span>{t("messageButton")}
                         </Button>
+                        <FullscreenModal
+                            isOpen={isOpen}
+                            onClose={() => {setIsOpen(false)}}
+                            label={t("contactFormLabel")}
+                        >
+                            <ContactForm
+                                onSuccess={() => {
+                                    console.log("Wysłane")}}
+                                onCancel={() => {
+                                    console.log("Anulowane")}}
+                            />
+                        </FullscreenModal>
                     </motion.div>
                     <div className="flex flex-row gap-3">
                         <motion.div

@@ -16,6 +16,11 @@
       "longSubject": "Temat nie może przekraczać {number} znaków",
       "shortContent": "Wiadomość jest wymagana",
       "longContent": "Wiadomość nie może przekraczać {number} znaków"
+    },
+    "message": {
+      "success": "Pomyślnie wysłano wiadomość",
+      "error": "Błąd w trakcie wysyłania wiadomości. Spróbuj ponownie później",
+      "info": "Obecnie przesyłanie wiadomości jest wyłączone. Nic nie stoi na przeszkodzie na zabawie i testowaniu"
     }
   }
 }

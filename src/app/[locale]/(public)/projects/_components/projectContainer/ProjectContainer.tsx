@@ -1,6 +1,6 @@
 "use client";
 
-import {Project} from "@/types/project";
+import {Project} from "@/types";
 import Image from "next/image";
 import BentoContainer from "@/components/ui/BentoContainer";
 import Pill from "@/components/ui/Pill";

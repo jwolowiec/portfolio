@@ -3,8 +3,8 @@ export type ButtonSize = "xs" | "sm" | "md" | "lg" | "xl";
 export type ButtonShape = "pill" | "circle" | "rounded";
 
 const variants: Record<ButtonVariant, string> = {
-    primary: "text-green-400 bg-green-500/10 border border-green-500/30 hover:scale-105",
-    secondary: "text-neutral-200 bg-neutral-800/10 border border-neutral-500 hover:scale-105",
+    primary: "text-green-400 bg-green-500/10 border border-green-500/30 hover:scale-105 disabled:scale-100",
+    secondary: "text-neutral-200 bg-neutral-800/10 border border-neutral-500 hover:scale-105 disabled:scale-100",
     link: "text-green-400 underline",
 }
 

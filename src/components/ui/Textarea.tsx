@@ -5,10 +5,11 @@ interface TextareaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement
     label: string
     hideLabel?: boolean;
     hint?: string;
+    length?: number;
     error?: string;
 }
 
-export default function Textarea({name, id, label, hideLabel = false, hint, error, ...props}: TextareaProps) {
+export default function Textarea({name, id, label, hideLabel = false, hint, length, error, maxLength, ...props}: TextareaProps) {
     const generatedId = useId();
     const textareaId = id || generatedId;
     const hintId = `${textareaId}-hint`;
@@ -41,12 +42,19 @@ export default function Textarea({name, id, label, hideLabel = false, hint, erro
                     : "border-neutral-800 focus:border-green-500/30"}
                 `}
             />
-            {error &&
-                <p id={errorId} className="pl-3 text-sm text-red-500">{error}</p>
-            }
-            {hint &&
-                <p id={hintId} className="pl-3 text-sm text-neutral-500">{hint}</p>
-            }
+            <div className="flex flex-row justify-between">
+                <div className="flex flex-col gap-2">
+                    {error &&
+                        <p id={errorId} className="pl-3 text-sm text-red-500">{error}</p>
+                    }
+                    {hint &&
+                        <p id={hintId} className="pl-3 text-sm text-neutral-500">{hint}</p>
+                    }
+                </div>
+                {maxLength && length !== undefined &&
+                    <p className="pr-3 text-sm text-neutral-500">{length} / {maxLength}</p>
+                }
+            </div>
         </div>
     );
 }

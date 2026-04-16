@@ -4,7 +4,8 @@
     "submit": "Wyślij",
     "cancel": "Anuluj",
     "save": "Zapisz",
-    "delete": "Usuń"
+    "delete": "Usuń",
+    "close": "Zamknij"
   },
   "Locales": {
     "pl": {

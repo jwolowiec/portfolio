@@ -4,7 +4,8 @@
     "submit": "Submit",
     "cancel": "Cancel",
     "save": "Save",
-    "delete": "Delete"
+    "delete": "Delete",
+    "close": "Close"
   },
   "Locales": {
     "pl": {

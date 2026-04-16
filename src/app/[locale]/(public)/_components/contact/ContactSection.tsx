@@ -1,7 +1,7 @@
 "use client";
 
 import BentoContainer from "@/components/ui/BentoContainer";
-import {motion} from "framer-motion";
+import {AnimatePresence, motion} from "framer-motion";
 import {
     buttonContainerVariants, buttonVariants,
     containerVariants,
@@ -10,7 +10,7 @@ import {
 } from "./animations";
 import TypeWriter from "@/components/ui/TypeWriter";
 import Button from "@/components/ui/button";
-import {FaEnvelope, FaGithub, FaLinkedin} from "react-icons/fa6";
+import {FaEnvelope, FaGithub, FaLinkedin, FaRegCircleCheck} from "react-icons/fa6";
 import {useTranslations} from "next-intl";
 import FullscreenModal from "@/components/ui/FullscreenModal";
 import {useState} from "react";
@@ -18,7 +18,15 @@ import ContactForm from "@/components/features/ContactForm";
 
 export default function ContactSection() {
     const t = useTranslations("homePage.ContactSection");
+    const tFormsMessages = useTranslations("forms.contact.message");
+    const tCommon = useTranslations("common.buttons");
     const [isOpen, setIsOpen] = useState<boolean>(false);
+    const [isSuccess, setIsSuccess] = useState<boolean>(false);
+
+    const handleClose = () => {
+        setIsOpen(false);
+        if (isSuccess) setIsSuccess(false);
+    };
 
     return (
         <BentoContainer className="col-span-full md:col-span-4 lg:col-span-5 row-span-2 flex flex-col">
@@ -54,7 +62,6 @@ export default function ContactSection() {
                         variants={buttonVariants}
                     >
                         <Button
-                            href="#"
                             size="xl"
                             className="flex flex-row gap-2"
                             onClick={() => {setIsOpen(true)}}
@@ -63,15 +70,57 @@ export default function ContactSection() {
                         </Button>
                         <FullscreenModal
                             isOpen={isOpen}
-                            onClose={() => {setIsOpen(false)}}
+                            onClose={handleClose}
                             label={t("contactFormLabel")}
                         >
-                            <ContactForm
-                                onSuccess={() => {
-                                    console.log("Wysłane")}}
-                                onCancel={() => {
-                                    console.log("Anulowane")}}
-                            />
+                            <div className="relative">
+                                <motion.div
+                                    key="contactForm"
+                                    animate={{
+                                        opacity: isSuccess ? 0 : 1,
+                                        pointerEvents: isSuccess ? "none" : "auto"
+                                    }}
+                                    transition={{
+                                        ease: "easeInOut",
+                                        duration: 0.4
+                                    }}
+                                >
+                                    <ContactForm
+                                        onSuccess={() => {
+                                            setIsSuccess(true);
+                                        }}
+                                        onCancel={handleClose}
+                                    />
+                                </motion.div>
+                                <AnimatePresence>
+                                    {isSuccess && (
+                                        <motion.div
+                                            key="messageSuccess"
+                                            initial={{
+                                                opacity: 0,
+                                            }}
+                                            animate={{
+                                                opacity: 1,
+                                            }}
+                                            transition={{
+                                                ease: "easeInOut",
+                                                duration: 0.4,
+                                                delay: 0.4
+                                            }}
+                                            className="absolute inset-0 flex flex-col justify-center items-center gap-5 text-green-400"
+                                        >
+                                            <FaRegCircleCheck size={96}/>
+                                            <p className="text-2xl text-center">{tFormsMessages("success")}</p>
+                                            <Button
+                                                size="lg"
+                                                onClick={handleClose}
+                                            >
+                                                {tCommon("close")}
+                                            </Button>
+                                        </motion.div>
+                                    )}
+                                </AnimatePresence>
+                            </div>
                         </FullscreenModal>
                     </motion.div>
                     <div className="flex flex-row gap-3">
@@ -85,6 +134,7 @@ export default function ContactSection() {
                                 size="xl"
                                 variant="secondary"
                                 shape="circle"
+                                aria-label={t("linkedinAriaLabel")}
                             >
                                 <FaLinkedin/>
                             </Button>
@@ -99,6 +149,7 @@ export default function ContactSection() {
                                 size="xl"
                                 variant="secondary"
                                 shape="circle"
+                                aria-label={t("githubAriaLabel")}
                             >
                                 <FaGithub/>
                             </Button>

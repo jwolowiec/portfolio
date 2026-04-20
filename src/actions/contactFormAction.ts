@@ -5,18 +5,30 @@ import {ActionResponse} from "@/types";
 import {z} from "zod";
 import {sendMail} from "@/lib/mail";
 import {logger} from "@/lib/logger";
+import {verifyTurnstileToken} from "@/lib/turnstile";
 
-export const contactFormAction = async ({email, subject, content}: ContactFormData): Promise<ActionResponse<ContactFormData>> => {
-    const result = ContactSchema.safeParse({email, subject, content});
+export const contactFormAction = async ({email, subject, content, token}: ContactFormData): Promise<ActionResponse<ContactFormData>> => {
+    const validation = ContactSchema.safeParse({email, subject, content, token});
 
-    if (!result.success) {
+    if (!validation.success) {
         return {
             success: false,
-            errors: z.flattenError(result.error).fieldErrors
+            errors: z.flattenError(validation.error).fieldErrors
         }
     }
 
     try {
+        const data = await verifyTurnstileToken(token);
+
+        if (!data.success) {
+            return {
+                success: false,
+                errors: {
+                    token: ["invalidToken"],
+                },
+            };
+        }
+
         // TODO: Change into sendMail, when form is ready
 
         await new Promise((resolve) => setTimeout(resolve, 2000));
@@ -31,7 +43,7 @@ export const contactFormAction = async ({email, subject, content}: ContactFormDa
             success: true,
         }
     } catch (error) {
-        logger.error("SMTP server error:", error);
+        logger.error("Server error:", error);
 
         return {
             success: false,

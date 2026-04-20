@@ -22,5 +22,12 @@
       "error": "Błąd w trakcie wysyłania wiadomości. Spróbuj ponownie później",
       "info": "Obecnie przesyłanie wiadomości jest wyłączone. Nic nie stoi na przeszkodzie na zabawie i testowaniu"
     }
+  },
+  "turnstile": {
+    "error": {
+      "keyError": "Weryfikacja nie działa. Nie można wysłać formularza",
+      "missingToken": "Weryfikacja wymagana",
+      "invalidToken": "Weryfikacja nie przeszła pomyślnie. Spróbuj ponownie"
+    }
   }
 }

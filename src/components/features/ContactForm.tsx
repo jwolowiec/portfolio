@@ -1,16 +1,18 @@
 "use client";
 
-import Button from "@/components/ui/button/Button";
+import Button from "@/components/ui/button";
 import Input from "@/components/ui/Input";
 import Textarea from "@/components/ui/Textarea";
 import {useForm, useWatch} from "react-hook-form";
 import {ContactFormData, ContactSchema, formLimits} from "@/schemas";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {useTranslations} from "next-intl";
-import React from "react";
+import React, {useRef} from "react";
 import {contactFormAction} from "@/actions/contactFormAction";
 import Spinner from "@/components/ui/Spinner";
 import {AnimatePresence, motion} from "framer-motion";
+import TurnstileWidget from "@/components/ui/TurnstileWidget";
+import {TurnstileInstance} from "@marsidev/react-turnstile";
 
 interface ContactFormProps {
     onSuccess: () => void;
@@ -18,13 +20,17 @@ interface ContactFormProps {
 }
 
 export default function ContactForm({onSuccess, onCancel}: ContactFormProps) {
+    const turnstileRef = useRef<TurnstileInstance>(null);
     const t = useTranslations("forms.contact");
     const tButtons = useTranslations("common.buttons");
+    const tTurnstile = useTranslations("forms.turnstile");
     const {
         register,
         control,
         handleSubmit,
+        setValue,
         setError,
+        clearErrors,
         formState: {errors, isValid, isSubmitting}
     } = useForm<ContactFormData>({
         resolver: zodResolver(ContactSchema),
@@ -43,6 +49,8 @@ export default function ContactForm({onSuccess, onCancel}: ContactFormProps) {
         if (success) {
             return onSuccess();
         }
+
+        turnstileRef.current?.reset()
 
         if (errors) {
             (Object.keys(errors) as Array<keyof ContactFormData>).forEach((key) => {
@@ -98,7 +106,6 @@ export default function ContactForm({onSuccess, onCancel}: ContactFormProps) {
                     placeholder="example@domain.com"
                     label={t("label.email")}
                     required
-                    autoFocus
                     disabled={isSubmitting}
                     error={errors.email?.message ? t(`error.${errors.email.message}`) : undefined}
                 />
@@ -125,6 +132,17 @@ export default function ContactForm({onSuccess, onCancel}: ContactFormProps) {
                     required
                     disabled={isSubmitting}
                     error={errors.content?.message ? t(`error.${errors.content.message}`, {number: formLimits.content.max}) : undefined}
+                />
+                <TurnstileWidget
+                    ref={turnstileRef}
+                    onSuccess={(token) => {
+                        setValue("token", token, { shouldValidate: true });
+                        clearErrors("token");
+                    }}
+                    onWidgetLoad={() => setValue("token", "")}
+                    onExpire={() => setValue("token", "")}
+                    onError={() => setValue("token", "")}
+                    error={errors.token?.message ? tTurnstile(`error.${errors.token.message}`) : undefined}
                 />
                 <div className="flex flex-col md:flex-row gap-3">
                     <Button

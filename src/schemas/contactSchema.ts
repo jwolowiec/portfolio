@@ -15,7 +15,10 @@ export const ContactSchema = z.object({
         .max(formLimits.subject.max, "longSubject"),
     content: z.string()
         .min(formLimits.content.min, "shortContent")
-        .max(formLimits.content.max, "longContent")
+        .max(formLimits.content.max, "longContent"),
+    token: z.string({
+        error: (iss) => !iss.input ? "missingToken" : undefined
+    }).min(1, "missingToken")
 });
 
 export type ContactFormData = z.infer<typeof ContactSchema>;

@@ -22,5 +22,12 @@
       "error": "Failed to send message. Try again later",
       "info": "Message sending is currently disabled. Feel free to play around and test the form"
     }
+  },
+  "turnstile": {
+    "error": {
+      "keyError": "Verification is unavailable. The form cannot be submitted.",
+      "missingToken": "Verification required.",
+      "invalidToken": "Verification failed. Please try again."
+    }
   }
 }

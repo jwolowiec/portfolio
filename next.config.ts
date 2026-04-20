@@ -1,8 +1,16 @@
 import {NextConfig} from 'next';
 import createNextIntlPlugin from 'next-intl/plugin';
+import {securityHeaders} from "@/constants/securityHeaders";
 
 const nextConfig: NextConfig = {
-
+    async headers() {
+        return [
+            {
+                source: "/(.*)",
+                headers: securityHeaders,
+            },
+        ]
+    }
 };
 
 const withNextIntl = createNextIntlPlugin();

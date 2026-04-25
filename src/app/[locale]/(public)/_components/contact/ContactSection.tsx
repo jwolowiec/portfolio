@@ -9,7 +9,7 @@ import {
     textWritingVariants
 } from "./animations";
 import TypeWriter from "@/components/ui/TypeWriter";
-import Button from "@/components/ui/button";
+import Button from "@/components/ui/button/Button";
 import {FaEnvelope, FaGithub, FaLinkedin, FaRegCircleCheck} from "react-icons/fa6";
 import {useTranslations} from "next-intl";
 import FullscreenModal from "@/components/ui/FullscreenModal";

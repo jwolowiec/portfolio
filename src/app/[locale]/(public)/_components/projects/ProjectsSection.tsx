@@ -2,7 +2,7 @@ import Slider from "@/components/ui/Slider";
 import ProjectCard from "./ProjectCard";
 import {LuArrowRight} from "react-icons/lu";
 import BentoContainer from "@/components/ui/BentoContainer";
-import {projects} from "../../../../../constants/projects";
+import {projects} from "@/constants/projects";
 import {Link} from "@/i18n/navigation";
 import {useTranslations} from "next-intl";
 

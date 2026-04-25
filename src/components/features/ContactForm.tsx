@@ -1,14 +1,14 @@
 "use client";
 
-import Button from "@/components/ui/button";
+import Button from "@/components/ui/button/Button";
 import Input from "@/components/ui/Input";
 import Textarea from "@/components/ui/Textarea";
 import {useForm, useWatch} from "react-hook-form";
-import {ContactFormData, ContactSchema, formLimits} from "@/schemas";
+import {ContactFormData, ContactSchema, formLimits} from "@/schemas/contact-schema/contactSchema";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {useTranslations} from "next-intl";
 import React, {useRef} from "react";
-import {contactFormAction} from "@/actions/contactFormAction";
+import {contactFormAction} from "@/actions/contact-form/contactFormAction";
 import Spinner from "@/components/ui/Spinner";
 import {AnimatePresence, motion} from "framer-motion";
 import TurnstileWidget from "@/components/ui/TurnstileWidget";

@@ -1,11 +1,11 @@
 "use server";
 
-import {ContactFormData, ContactSchema} from "@/schemas";
-import {ActionResponse} from "@/types";
+import {ContactFormData, ContactSchema} from "@/schemas/contact-schema/contactSchema";
+import {ActionResponse} from "@/types/actions";
 import {z} from "zod";
-import {sendMail} from "@/lib/mail";
-import {logger} from "@/lib/logger";
-import {verifyTurnstileToken} from "@/lib/turnstile";
+import {sendMail} from "@/lib/mail/sendMail";
+import {logger} from "@/lib/logger/logger";
+import {verifyTurnstileToken} from "@/lib/turnstile/verify";
 
 export const contactFormAction = async ({email, subject, content, token}: ContactFormData): Promise<ActionResponse<ContactFormData>> => {
     const validation = ContactSchema.safeParse({email, subject, content, token});
@@ -29,15 +29,11 @@ export const contactFormAction = async ({email, subject, content, token}: Contac
             };
         }
 
-        // TODO: Change into sendMail, when form is ready
-
-        await new Promise((resolve) => setTimeout(resolve, 2000));
-
-        // await sendMail({
-        //     replyTo: email,
-        //     subject,
-        //     text: content
-        // });
+        await sendMail({
+            replyTo: email,
+            subject,
+            text: content
+        });
 
         return {
             success: true,

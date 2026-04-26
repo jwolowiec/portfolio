@@ -1,7 +1,7 @@
 import Container from "@/components/ui/Container";
 import {FaChevronRight, FaGithub, FaLinkedin, FaRegCopyright} from "react-icons/fa6";
 import {navLinks} from "@/constants/navigation";
-import {NavLink} from "@/types";
+import {NavLink} from "@/types/navigation";
 import BentoContainer from "@/components/ui/BentoContainer";
 import {MdLocationOn, MdMail, MdPerson, MdPhone} from "react-icons/md";
 import {personalInfo} from "@/constants/personalInfo";
@@ -27,7 +27,7 @@ export default function Footer() {
                     <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 px-4">
                         <FooterColumn title={t("shortcuts")}>
                             <nav>
-                                <ul className="flex flex-col gap-2">
+                                <ul className="flex flex-col">
                                     {navLinks.map((link) => {
                                         return (
                                             <li key={link.href}>

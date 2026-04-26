@@ -20,7 +20,7 @@ export default function HeroSection() {
                     src={mainImg} alt={"Jakub Wołowiec - zdjęcie"} loading="eager"/>
             </motion.div>
             <motion.div
-                className="text-center md:text-left [--start-x:0rem] [--start-y:12rem] md:[--start-x:-12rem] md:[--start-y:0rem]"
+                className="text-center md:text-left flex flex-col gap-3 [--start-x:0rem] [--start-y:12rem] md:[--start-x:-12rem] md:[--start-y:0rem]"
                 initial={{opacity: 0, x: "var(--start-x)", y: "var(--start-y)"}}
                 animate={{opacity: 1, x: 0, y: 0}}
                 transition={{duration: 0.6, ease: "easeOut", delay: 0.2}}

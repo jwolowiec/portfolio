@@ -96,9 +96,6 @@ export default function ContactForm({onSuccess, onCancel}: ContactFormProps) {
                 )}
             </AnimatePresence>
             <div className="flex flex-col gap-6">
-                <div className="bg-yellow-500/10 border border-yellow-500/50 text-yellow-400 p-4 rounded-xl text-sm">
-                    {t("message.info")}
-                </div>
                 <Input
                     type="email"
                     {...register("email")}

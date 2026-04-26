@@ -14,10 +14,10 @@ export default function DesktopNav() {
     const localesT = useTranslations("common.Locales");
 
     return (
-        <Container
-            className="hidden md:block"
+        <nav
+            className="hidden md:block w-full bg-linear-to-b from-neutral-950/90 via-neutral-950/50 via-75% to-transparent overflow-hidden"
         >
-            <nav className="p-2 grid grid-cols-[1fr_auto_1fr] items-center rounded-4xl bg-neutral-900/80 backdrop-blur-md border border-neutral-800">
+            <Container className="grid grid-cols-[1fr_auto_1fr] items-center my-2">
                 <div></div>
                 <ul className="flex items-center bg-neutral-900/80 backdrop-blur-md border border-neutral-800 rounded-3xl p-2 gap-3">
                     {navLinks.map((link) => {
@@ -63,7 +63,7 @@ export default function DesktopNav() {
                         })}
                     </ul>
                 </div>
-            </nav>
-        </Container>
+            </Container>
+        </nav>
     );
 }

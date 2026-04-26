@@ -35,7 +35,7 @@ export default function ContactSection() {
                 initial="hidden"
                 whileInView="visible"
                 viewport={{once: true, amount: 0.4}}
-                className="grow flex flex-col justify-center items-center gap-4 p-6 text-center"
+                className="grow flex flex-col justify-center items-center gap-5 p-6 text-center"
             >
                 <motion.h2
                     variants={textWritingVariants}

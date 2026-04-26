@@ -37,7 +37,7 @@ export default async function RootLayout({children, params}: Props) {
     return (
         <html lang={locale}>
         <body
-            className={mondaSans.className}
+            className={`${mondaSans.className} bg-neutral-950`}
         >
         <NextIntlClientProvider>
             {children}

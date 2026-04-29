@@ -1,5 +1,5 @@
 import React from "react";
-import {ThemeColor} from "@/types";
+import {ThemeColor} from "@/types/theme";
 
 interface PillProps{
     children: React.ReactNode;

@@ -45,7 +45,12 @@ export default function TechnologyCard({ technology, index }: TechnologyCardProp
                     }}
                     className="flex flex-col justify-center items-center gap-2"
                 >
-                    <technology.icon size={64} className="text-green-400" />
+                    <technology.icon
+                        size={64}
+                        className="text-green-400"
+                        aria-hidden="true"
+                        focusable="false"
+                    />
                     <p>{technology.name}</p>
                 </motion.div>
             </AnimatePresence>

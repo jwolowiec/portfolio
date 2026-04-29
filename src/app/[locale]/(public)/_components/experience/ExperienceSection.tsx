@@ -13,7 +13,7 @@ export default function ExperienceSection() {
                 {timelineData.map((item) => {
                     return (
                         <TimelineItem
-                            key={t(`items.${item.translationKey}.title`)}
+                            key={item.translationKey}
                             title={t(`items.${item.translationKey}.title`)}
                             subtitle={t(`items.${item.translationKey}.subtitle`)}
                             date={t(`items.${item.translationKey}.date`)}

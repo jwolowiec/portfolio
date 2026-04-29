@@ -26,7 +26,7 @@ export default function ProcessStep({index, label, Icon, technologies, isLast = 
                 >
                     <Icon size={12}/>
                 </motion.span>
-                {isLast ? (
+                {!isLast ? (
                     <motion.div
                         custom={index}
                         variants={lineVariants}

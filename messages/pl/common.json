@@ -7,6 +7,12 @@
     "delete": "Usuń",
     "close": "Zamknij"
   },
+  "Slider": {
+    "empty": "Brak",
+    "prevSlide": "Poprzedni slajd",
+    "nextSlide": "Następny slajd",
+    "goToSlide": "Przejdź do slajdu"
+  },
   "Locales": {
     "pl": {
       "name": "Polski",
@@ -15,6 +21,13 @@
     "en": {
       "name": "Angielski",
       "shortcut": "ENG"
+    }
+  },
+  "Header": {
+    "MobileNav": {
+      "openMenu": "Otwórz menu nawigacyjne",
+      "closeMenu": "Zamknij menu nawigacyjne",
+      "navLabel": "Nawigacja mobilna"
     }
   },
   "Links": {

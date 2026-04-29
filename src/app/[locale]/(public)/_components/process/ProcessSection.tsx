@@ -42,7 +42,7 @@ export default function ProcessSection() {
                             label={t(`timeline.${item.labelKey}.title`)}
                             Icon={item.icon}
                             technologies={item.technologies}
-                            isLast={workTimeline.length - 1 !== index}
+                            isLast={workTimeline.length - 1 === index}
                         />
                     );
                 })}

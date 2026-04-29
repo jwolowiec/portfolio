@@ -7,6 +7,12 @@
     "delete": "Delete",
     "close": "Close"
   },
+  "Slider": {
+    "empty": "No items",
+    "prevSlide": "Previous slide",
+    "nextSlide": "Next slide",
+    "goToSlide": "Go to slide"
+  },
   "Locales": {
     "pl": {
       "name": "Polish",
@@ -15,6 +21,13 @@
     "en": {
       "name": "English",
       "shortcut": "ENG"
+    }
+  },
+  "Header": {
+    "MobileNav": {
+      "openMenu": "Open navigation menu",
+      "closeMenu": "Close navigation menu",
+      "navLabel": "Mobile navigation"
     }
   },
   "Links": {

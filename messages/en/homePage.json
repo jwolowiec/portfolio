@@ -6,7 +6,9 @@
       "screenShot": "Screenshot",
       "visitButton": "Visit",
       "projectDescriptionButton": "Description",
-      "technologies": "Technologies"
+      "technologies": "Technologies",
+      "expandProject": "Expand project details",
+      "collapseProject": "Collapse project details"
     }
   },
   "ProcessSection": {
@@ -22,6 +24,9 @@
         "title": "Deployment & servers"
       }
     }
+  },
+  "TechnologySection": {
+    "header": "Technologies"
   },
   "ExperienceSection": {
     "header": "Experience",

@@ -26,7 +26,7 @@ export default function ProjectCard(props: ProjectCardProps) {
             variants={containerVariants}
             custom={props.index}
             initial="hidden"
-            animate="visible"
+            whileInView="visible"
             viewport={{once: true, amount: 0.4}}
             className="
                 relative rounded-2xl bg-neutral-900/80 backdrop-blur-md w-full h-full
@@ -37,7 +37,9 @@ export default function ProjectCard(props: ProjectCardProps) {
                 src={props.image}
                 alt={`${t("screenShot")}: ${props.name}`}
                 className="grow object-cover rounded-xl"
-                loading="eager"
+                priority={props.index <= 1}
+                fetchPriority={props.index <= 1 ? "high" : "auto"}
+                sizes="(min-width: 1280px) 1280px, 100vw"
             />
             <div
                 className="absolute bottom-0 inset-0 m-1 flex flex-col justify-end items-center gap-2"
@@ -46,6 +48,7 @@ export default function ProjectCard(props: ProjectCardProps) {
                     onClick={() => {
                         setIsExpanded(!isExpanded)
                     }}
+                    aria-label={isExpanded ? t("collapseProject") : t("expandProject")}
                     className="
                         bg-neutral-900/80 backdrop-blur-md
                         border-neutral-500/30 rounded-full p-1 hover:scale-105"
@@ -66,7 +69,7 @@ export default function ProjectCard(props: ProjectCardProps) {
                         bg-neutral-900/80 backdrop-blur-md border border-neutral-500/30
                         p-3 rounded-xl w-full flex flex-col gap-2 overflow-hidden`}
                 >
-                    <h4 className="text-lg text-center font-bold">{props.name}</h4>
+                    <h3 className="text-lg text-center font-bold">{props.name}</h3>
                     <AnimatePresence>
                         {isExpanded && (
                             <motion.div
@@ -107,7 +110,7 @@ export default function ProjectCard(props: ProjectCardProps) {
                                             {t("projectDescriptionButton")}
                                         </Button>
                                     </div>
-                                    <p>{t("technologies")}</p>
+                                    <h4>{t("technologies")}</h4>
                                     <div className="flex flex-row justify-center gap-2 flex-wrap">
                                         {props.technologies.map((technology) => {
                                             return (

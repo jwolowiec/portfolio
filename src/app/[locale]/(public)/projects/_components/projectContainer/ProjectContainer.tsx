@@ -15,11 +15,12 @@ import {
 } from "./animations";
 
 interface ProjectContainerProps {
-    project: Project
-    isReversed: boolean
+    project: Project;
+    isReversed: boolean;
+    isFirst: boolean;
 }
 
-export default function ProjectContainer({project, isReversed}: ProjectContainerProps) {
+export default function ProjectContainer({project, isReversed, isFirst}: ProjectContainerProps) {
     const t = useTranslations("projectPage");
 
     return (
@@ -40,6 +41,8 @@ export default function ProjectContainer({project, isReversed}: ProjectContainer
                         src={project.image}
                         alt={`${t("screenshot")}: ${project.name}`}
                         className="w-full h-96 md:h-full object-cover rounded-xl"
+                        priority={isFirst}
+                        sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
                     />
                 </motion.div>
             </BentoContainer>

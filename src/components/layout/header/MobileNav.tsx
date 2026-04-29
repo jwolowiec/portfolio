@@ -14,6 +14,8 @@ export default function MobileNav() {
     const path = usePathname();
     const navLinksT = useTranslations("common.Links.navLinks");
     const localesT = useTranslations("common.Locales");
+    const tMobileNav = useTranslations("common.Header.MobileNav");
+
     const [isOpen, setIsOpen] = useState(false);
 
     useEffect(() => {
@@ -33,15 +35,20 @@ export default function MobileNav() {
             <div className="md:hidden fixed right-5 top-5 z-50">
                 <button
                     onClick={() => setIsOpen(!isOpen)}
+                    aria-expanded={isOpen}
+                    aria-controls="mobile-navigation-menu"
+                    aria-label={isOpen ? tMobileNav("closeMenu") : tMobileNav("openMenu")}
                     className="p-3 bg-neutral-900/80 backdrop-blur-md border border-neutral-800 rounded-full active:scale-90 transition-transform"
                 >
-                    {isOpen ? <LuX size={24}/> : <LuMenu size={24}/>}
+                    {isOpen ? <LuX aria-hidden="true" size={24}/> : <LuMenu aria-hidden="true" size={24}/>}
                 </button>
             </div>
             <AnimatePresence>
                 {isOpen && (
                     <div className="fixed inset-0 flex flex-col">
                         <motion.nav
+                            id="mobile-navigation-menu"
+                            aria-label={tMobileNav("navLabel")}
                             variants={containerVariants}
                             initial="hidden"
                             animate="visible"
@@ -61,6 +68,7 @@ export default function MobileNav() {
                                             <Link
                                                 onClick={() => setIsOpen(false)}
                                                 href={link.href}
+                                                aria-current={isActive ? "page" : undefined}
                                                 className="block w-full h-full"
                                             >
                                                 {navLinksT(`${link.name}`)}
@@ -79,6 +87,7 @@ export default function MobileNav() {
                                                 key={locale}
                                                 href={path}
                                                 locale={locale}
+                                                aria-current={current ? "true" : undefined}
                                                 className={`text-base px-4 ${current ? "text-green-400" : "text-neutral-400 hover:text-white"}`}
                                             >
                                                 {localesT(`${locale}.shortcut`)}
@@ -97,6 +106,7 @@ export default function MobileNav() {
                             onClick={() => {
                                 setIsOpen(false)
                             }}
+                            aria-hidden="true"
                         />
                     </div>
                 )}

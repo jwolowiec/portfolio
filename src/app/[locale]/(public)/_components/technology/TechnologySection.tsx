@@ -4,10 +4,12 @@ import BentoContainer from "@/components/ui/BentoContainer";
 import { technologies } from "@/constants/technologies";
 import { useState, useEffect } from "react";
 import TechnologyCard from "./TechnologyCard";
+import {useTranslations} from "next-intl";
 
 const MAX_VISIBLE_CARDS = 8;
 
 export default function TechnologySection() {
+    const t = useTranslations("homePage.TechnologySection");
     const [index, setIndex] = useState<number>(0);
 
     useEffect(() => {
@@ -20,15 +22,16 @@ export default function TechnologySection() {
 
     return (
         <BentoContainer className="col-span-full flex flex-col">
+            <h2 className="sr-only">{t("header")}</h2>
             <div
                 className="grow grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 justify-center items-center gap-4 h-full w-full"
             >
-                {Array.from({ length: MAX_VISIBLE_CARDS }).map((_, i) => {
+                {Array.from({length: MAX_VISIBLE_CARDS}).map((_, i) => {
                     const techIndex = (i + index) % technologies.length;
                     const technology = technologies[techIndex];
 
                     return (
-                        <TechnologyCard key={i} technology={technology} index={i} />
+                        <TechnologyCard key={i} technology={technology} index={i}/>
                     )
                 })}
             </div>

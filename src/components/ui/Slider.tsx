@@ -3,6 +3,7 @@
 import React, {useEffect, useRef, useState} from "react";
 import {LuChevronLeft, LuChevronRight} from "react-icons/lu";
 import {breakpoints} from "@/constants/breakpoints";
+import {useTranslations} from "next-intl";
 
 type BreakpointKey = keyof typeof breakpoints;
 
@@ -19,6 +20,7 @@ const sortedKeys = (Object.keys(breakpoints) as BreakpointKey[]).sort(
 );
 
 export default function Slider({children, className = "", visibleSlides}: SliderProps){
+    const t = useTranslations("common.Slider");
     const sliderRef = useRef<HTMLDivElement>(null);
     const [isActive, setIsActive] = useState<number>(0);
     const [currentCols, setCurrentCols] = useState<number>(1);
@@ -100,7 +102,7 @@ export default function Slider({children, className = "", visibleSlides}: Slider
     if (childrenLength === 0) {
         return (
             <div className="w-full h-full flex justify-center items-center">
-                <div className="text-lg">Brak</div>
+                <div className="text-lg">{t("empty")}</div>
             </div>
         );
     }
@@ -113,6 +115,7 @@ export default function Slider({children, className = "", visibleSlides}: Slider
                 <button
                     onClick={scrollPrev}
                     disabled={isActive === 0}
+                    aria-label={t("prevSlide")}
                     className="cursor-pointer disabled:opacity-30 disabled:cursor-default transition-opacity"
                 >
                     <LuChevronLeft className="text-green-400" strokeWidth={1} size={48}/>
@@ -137,6 +140,7 @@ export default function Slider({children, className = "", visibleSlides}: Slider
                 <button
                     onClick={scrollNext}
                     disabled={isActive === pagination - 1}
+                    aria-label={t("nextSlide")}
                     className="cursor-pointer disabled:opacity-30 disabled:cursor-default transition-opacity"
                 >
                     <LuChevronRight className="text-green-400" strokeWidth={1} size={48}/>
@@ -152,7 +156,7 @@ export default function Slider({children, className = "", visibleSlides}: Slider
                                 ? "bg-green-500 w-4"
                                 : "bg-neutral-600 hover:bg-neutral-400"
                         }`}
-                        aria-label={`Przejdź do slajdu ${index + 1}`}
+                        aria-label={`${t("goToSlide")} ${index + 1}`}
                     />
                 ))}
             </div>

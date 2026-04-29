@@ -24,7 +24,7 @@ export default function ProjectsSection() {
                     ) : projects.map((project, index) => {
                         return (
                             <ProjectCard
-                                key={index}
+                                key={project.name}
                                 image={project.image}
                                 name={project.name}
                                 url={project.url}
@@ -34,7 +34,7 @@ export default function ProjectsSection() {
                         )
                     })}
                     <div className="w-full h-full flex flex-row justify-center items-center">
-                        <Link href="/src/constants/projects" className="flex flex-col items-center gap-2">
+                        <Link href="/projects" className="flex flex-col items-center gap-2">
                             <div
                                 className="w-12 h-12 flex flex-row justify-center items-center rounded-full border border-green-500/30 text-green-400 hover:scale-110 transition-all">
                                 <LuArrowRight/>

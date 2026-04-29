@@ -17,7 +17,11 @@ export default function HeroSection() {
             >
                 <Image
                     className="border-3 border-green-500/30 w-48 h-48 md:w-64 md:h-64 rounded-full object-cover object-top"
-                    src={mainImg} alt={"Jakub Wołowiec - zdjęcie"} loading="eager"/>
+                    src={mainImg}
+                    alt={"Jakub Wołowiec - zdjęcie"}
+                    loading="eager"
+                    sizes="(min-width: 768px) 256px, 192px"
+                />
             </motion.div>
             <motion.div
                 className="text-center md:text-left flex flex-col gap-3 [--start-x:0rem] [--start-y:12rem] md:[--start-x:-12rem] md:[--start-y:0rem]"

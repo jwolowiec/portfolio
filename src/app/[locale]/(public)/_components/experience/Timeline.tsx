@@ -38,12 +38,12 @@ export function TimelineItem({title, subtitle, date}: TimelineItemProps) {
                 <p className="font-medium text-green-400">
                     {date}
                 </p>
-                <h4 className="text-lg font-bold">
+                <h3 className="text-lg font-bold">
                     {title}
-                </h4>
-                <h5 className="text-base font-medium text-neutral-400">
+                </h3>
+                <h4 className="text-base font-medium text-neutral-400">
                     {subtitle}
-                </h5>
+                </h4>
             </div>
         </motion.li>
     );

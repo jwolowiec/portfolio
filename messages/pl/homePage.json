@@ -6,7 +6,9 @@
       "screenShot": "Zrzut ekranu",
       "visitButton": "Odwiedź",
       "projectDescriptionButton": "Opis",
-      "technologies": "Technologie"
+      "technologies": "Technologie",
+      "expandProject": "Rozwiń szczegóły projektu",
+      "collapseProject": "Zwiń szczegóły projektu"
     }
   },
   "ProcessSection": {
@@ -22,6 +24,9 @@
         "title": "Wdrożenie i serwery"
       }
     }
+  },
+  "TechnologySection": {
+    "header": "Technologie"
   },
   "ExperienceSection": {
     "header": "Doświadczenie",

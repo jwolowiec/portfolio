@@ -16,18 +16,20 @@ export default function TypeWriter(props: TypeWriterProps) {
     const characters = Array.from(props.text);
 
     return (
-        <span className={props.className} aria-label={props.text}>
-            {characters.map((character, index) => {
-                return (
-                    <motion.span
-                        key={index}
-                        variants={characterVariants}
-                        aria-hidden="true"
-                    >
-                        {character}
-                    </motion.span>
-                );
-            })}
+        <span className={props.className}>
+            <span className="sr-only">{props.text}</span>
+            <span aria-hidden="true">
+                {characters.map((character, index) => {
+                    return (
+                        <motion.span
+                            key={index}
+                            variants={characterVariants}
+                        >
+                            {character}
+                        </motion.span>
+                    );
+                })}
+            </span>
         </span>
     );
 }

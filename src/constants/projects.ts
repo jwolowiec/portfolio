@@ -1,6 +1,6 @@
 import grawerkiCnc from "@public/grawerki-cnc.png";
 import embeddedSystemsServer from "@public/embedded-systems-server.png";
-import {Project} from "@/types";
+import {Project} from "@/types/project";
 
 export const projects: Project[] = [
     {

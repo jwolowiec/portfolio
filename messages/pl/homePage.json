@@ -9,14 +9,18 @@
       "technologies": "Technologie"
     }
   },
-  "AboutMeSection": {
-    "design": "<plain>Projektuję </plain><highlight>design</highlight><plain>.</plain>",
-    "code": "<plain>Piszę </plain><highlight>kod</highlight><plain>.</plain>",
-    "deploy": "<plain>Wdrażam </plain><highlight>aplikacje</highlight><plain>.</plain>",
-    "tiles": {
-      "location": "Poznań/Zdalnie",
-      "webApps": "Aplikacje Webowe",
-      "role": "Fullstack Developer"
+  "ProcessSection": {
+    "headline": "<plain>Każdy projekt to unikalny </plain><highlight>design</highlight><plain>, precyzyjny </plain><highlight>kod</highlight><plain> i bezpieczne </plain><highlight>wdrożenie</highlight><plain>.</plain>",
+    "timeline": {
+      "design": {
+        "title": "Design i architektura"
+      },
+      "code": {
+        "title": "Pisanie kodu"
+      },
+      "deploy": {
+        "title": "Wdrożenie i serwery"
+      }
     }
   },
   "ExperienceSection": {

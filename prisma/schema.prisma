@@ -1,0 +1,49 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Project {
+  id           String   @id @default(uuid()) @db.Uuid
+  labels       Label[]
+  url          String
+  image        Image    @relation(fields: [imageId], references: [id])
+  imageId      String   @unique @db.Uuid
+  technologies String[]
+}
+
+model Image {
+  id        String   @id @default(uuid()) @db.Uuid
+  path      String
+  status    Status   @default(PENDING)
+  createdAt DateTime @default(now())
+  project   Project?
+}
+
+model Label {
+  id              String   @id @default(uuid()) @db.Uuid
+  project         Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  projectId       String   @db.Uuid
+  slug            String
+  language        String
+  name            String
+  description     String
+  characteristics String[]
+
+  @@unique([projectId, language])
+}
+
+enum Status {
+  PENDING
+  SAVED
+  DELETED
+}

@@ -2,13 +2,17 @@ import Slider from "@/components/ui/Slider";
 import ProjectCard from "./ProjectCard";
 import {LuArrowRight} from "react-icons/lu";
 import BentoContainer from "@/components/ui/BentoContainer";
-import {projects} from "@/constants/projects";
 import {Link} from "@/i18n/navigation";
-import {useTranslations} from "next-intl";
+import {getLocale, getTranslations} from "next-intl/server";
+import {getLocalizedProjects} from "@/lib/data/projects";
 
-export default function ProjectsSection() {
-    const section = useTranslations("homePage.ProjectSection");
-    const common = useTranslations("common");
+export default async function ProjectsSection() {
+    const [section, common, locale] = await Promise.all([
+        getTranslations("homePage.ProjectSection"),
+        getTranslations("common"),
+        getLocale()
+    ]);
+    const projects = await getLocalizedProjects(locale);
 
     return (
         <BentoContainer className="col-span-full md:col-span-4 lg:col-span-5 row-span-2 flex flex-col">
@@ -24,11 +28,8 @@ export default function ProjectsSection() {
                     ) : projects.map((project, index) => {
                         return (
                             <ProjectCard
-                                key={project.name}
-                                image={project.image}
-                                name={project.name}
-                                url={project.url}
-                                technologies={project.technologies}
+                                key={project.id}
+                                project={project}
                                 index={index}
                             />
                         )

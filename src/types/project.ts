@@ -1,10 +1,6 @@
-import {StaticImageData} from "next/image";
+import {Image, Label, Project} from "@/generated/prisma/browser";
 
-export interface Project {
-    name: string;
-    image: StaticImageData;
-    url: string;
-    technologies: string[],
-    description: string,
-    characteristics: string[]
+export interface LocalizedProject extends Project{
+    label: Label;
+    image: Image;
 }

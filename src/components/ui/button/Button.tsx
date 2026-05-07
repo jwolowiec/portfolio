@@ -1,5 +1,5 @@
-import React from "react";
-import Link, {LinkProps} from "next/link";
+import React, {ComponentProps} from "react";
+import {Link} from "@/i18n/navigation";
 import {ButtonShape, ButtonSize, ButtonVariant, theme} from "./styles";
 
 interface BaseProps{
@@ -10,8 +10,10 @@ interface BaseProps{
     children?: React.ReactNode;
 }
 
-interface LinkTypes extends BaseProps, LinkProps, Omit<React.AnchorHTMLAttributes<HTMLAnchorElement>, keyof LinkProps>{
-    href: string
+type NextIntlLinkProps = ComponentProps<typeof Link>;
+
+interface LinkTypes extends BaseProps, NextIntlLinkProps {
+    href: string;
 }
 
 interface ButtonTypes extends BaseProps, React.ButtonHTMLAttributes<HTMLButtonElement>{

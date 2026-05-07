@@ -1,6 +1,6 @@
 import {getTranslations, setRequestLocale} from "next-intl/server";
-import {projects} from "@/constants/projects";
 import ProjectContainer from "./_components/projectContainer/ProjectContainer";
+import {getLocalizedProjects} from "@/lib/data/projects";
 
 export default async function Page({params}: {params: Promise<{locale: string}>}) {
     const {locale} = await params;
@@ -8,6 +8,7 @@ export default async function Page({params}: {params: Promise<{locale: string}>}
     setRequestLocale(locale);
 
     const t = await getTranslations({locale, namespace: "projectPage"});
+    const projects = await getLocalizedProjects(locale);
 
     return (
         <>
@@ -17,10 +18,10 @@ export default async function Page({params}: {params: Promise<{locale: string}>}
 
                 return (
                     <ProjectContainer
-                        key={project.name}
+                        key={project.id}
                         project={project}
                         isReversed={isReversed}
-                        isFirst={index === 0}
+                        priority={index <= 1}
                     />
                 );
             })}

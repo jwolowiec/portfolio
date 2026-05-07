@@ -30,7 +30,7 @@ export default function FullscreenModal({isOpen, onClose, children, label}: Moda
             <AnimatePresence>
                 {isOpen && (
                     <section
-                        className="fixed inset-0 z-50 bg-neutral-950/80 backdrop-blur-sm flex flex-col items-center justify-center"
+                        className="fixed inset-0 z-1100 bg-neutral-950/80 backdrop-blur-sm flex flex-col items-center justify-center"
                     >
                         <motion.div
                             initial={{opacity: 0}}

@@ -1,6 +1,6 @@
 "use client";
 
-import Image, {StaticImageData} from "next/image";
+import Image from "@/components/ui/Image";
 import Button from "@/components/ui/button/Button";
 import Pill from "@/components/ui/Pill";
 import {LuChevronUp} from "react-icons/lu";
@@ -8,23 +8,21 @@ import {useState} from "react";
 import {AnimatePresence, motion} from "framer-motion";
 import {containerVariants} from "./animations";
 import {useTranslations} from "next-intl";
+import {LocalizedProject} from "@/types/project";
 
-interface ProjectCardProps {
-    image: StaticImageData;
-    name: string;
-    url: string;
-    technologies: string[];
+interface ProjectCardProps{
+    project: LocalizedProject;
     index: number;
 }
 
-export default function ProjectCard(props: ProjectCardProps) {
+export default function ProjectCard({project, index}: ProjectCardProps) {
     const [isExpanded, setIsExpanded] = useState<boolean>(false);
     const t = useTranslations("homePage.ProjectSection.ProjectCard");
 
     return (
         <motion.div
             variants={containerVariants}
-            custom={props.index}
+            custom={index}
             initial="hidden"
             whileInView="visible"
             viewport={{once: true, amount: 0.4}}
@@ -34,21 +32,21 @@ export default function ProjectCard(props: ProjectCardProps) {
                 overflow-hidden flex flex-col"
         >
             <Image
-                src={props.image}
-                alt={`${t("screenShot")}: ${props.name}`}
-                className="grow object-cover rounded-xl"
-                priority={props.index <= 1}
-                fetchPriority={props.index <= 1 ? "high" : "auto"}
-                sizes="(min-width: 1280px) 1280px, 100vw"
+                src={project.image.path}
+                fill
+                alt={`${t("screenShot")}: ${project.label.name}`}
+                className="object-cover rounded-xl"
+                fetchPriority={index <= 1 ? "high" : "auto"}
+                loading={index <= 1 ? "eager" : "lazy"}
+                sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
             />
             <div
-                className="absolute bottom-0 inset-0 m-1 flex flex-col justify-end items-center gap-2"
+                className="absolute inset-0 m-1 flex flex-col justify-end items-center gap-2"
             >
                 <button
-                    onClick={() => {
-                        setIsExpanded(!isExpanded)
-                    }}
+                    onClick={() => setIsExpanded(prev => !prev)}
                     aria-label={isExpanded ? t("collapseProject") : t("expandProject")}
+                    aria-expanded={isExpanded}
                     className="
                         bg-neutral-900/80 backdrop-blur-md
                         border-neutral-500/30 rounded-full p-1 hover:scale-105"
@@ -69,7 +67,7 @@ export default function ProjectCard(props: ProjectCardProps) {
                         bg-neutral-900/80 backdrop-blur-md border border-neutral-500/30
                         p-3 rounded-xl w-full flex flex-col gap-2 overflow-hidden`}
                 >
-                    <h3 className="text-lg text-center font-bold">{props.name}</h3>
+                    <h3 className="text-lg text-center font-bold">{project.label.name}</h3>
                     <AnimatePresence>
                         {isExpanded && (
                             <motion.div
@@ -96,7 +94,7 @@ export default function ProjectCard(props: ProjectCardProps) {
                                     <div className="flex flex-row gap-2">
                                         <Button
                                             size="sm"
-                                            href={props.url}
+                                            href={project.url}
                                             target="_blank"
                                             rel="noopener noreferrer"
                                         >
@@ -112,7 +110,7 @@ export default function ProjectCard(props: ProjectCardProps) {
                                     </div>
                                     <h4>{t("technologies")}</h4>
                                     <div className="flex flex-row justify-center gap-2 flex-wrap">
-                                        {props.technologies.map((technology) => {
+                                        {project.technologies.map((technology) => {
                                             return (
                                                 <Pill key={technology}>{technology}</Pill>
                                             );

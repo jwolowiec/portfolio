@@ -1,7 +1,6 @@
 "use client";
 
-import {Project} from "@/types/project";
-import Image from "next/image";
+import Image from "@/components/ui/Image";
 import BentoContainer from "@/components/ui/BentoContainer";
 import Pill from "@/components/ui/Pill";
 import Button from "@/components/ui/button/Button";
@@ -13,14 +12,15 @@ import {
     containerVariants, fadeUpVariants,
     imageVariants, pillsContainerVariants, pillVariants
 } from "./animations";
+import {LocalizedProject} from "@/types/project";
 
 interface ProjectContainerProps {
-    project: Project;
+    project: LocalizedProject;
     isReversed: boolean;
-    isFirst: boolean;
+    priority: boolean;
 }
 
-export default function ProjectContainer({project, isReversed, isFirst}: ProjectContainerProps) {
+export default function ProjectContainer({project, isReversed, priority}: ProjectContainerProps) {
     const t = useTranslations("projectPage");
 
     return (
@@ -35,13 +35,15 @@ export default function ProjectContainer({project, isReversed, isFirst}: Project
                 className={`row-span-2 col-span-full md:col-span-2 lg:col-span-3 ${isReversed ? 'md:order-last' : ''}`}>
                 <motion.div
                     variants={imageVariants}
-                    className="w-full h-full"
+                    className="w-full h-96 md:h-full relative"
                 >
                     <Image
-                        src={project.image}
-                        alt={`${t("screenshot")}: ${project.name}`}
-                        className="w-full h-96 md:h-full object-cover rounded-xl"
-                        priority={isFirst}
+                        src={project.image.path}
+                        alt={`${t("screenshot")}: ${project.label.name}`}
+                        fill
+                        className="object-cover rounded-xl"
+                        fetchPriority={priority ? "high" : "auto"}
+                        loading={priority ? "eager" : "lazy"}
                         sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
                     />
                 </motion.div>
@@ -51,7 +53,7 @@ export default function ProjectContainer({project, isReversed, isFirst}: Project
                     variants={fadeUpVariants}
                     className="text-2xl text-green-400"
                 >
-                    {project.name}
+                    {project.label.name}
                 </motion.h2>
                 <motion.div
                     variants={pillsContainerVariants}
@@ -76,10 +78,10 @@ export default function ProjectContainer({project, isReversed, isFirst}: Project
                         variants={fadeUpVariants}
                         className="text-neutral-400"
                     >
-                        {project.description}
+                        {project.label.description}
                     </motion.p>
                     <ul className="flex flex-col gap-3">
-                        {project.characteristics.map((characteristic, index) => {
+                        {project.label.characteristics.map((characteristic, index) => {
                             return (
                                 <motion.li
                                     key={index}

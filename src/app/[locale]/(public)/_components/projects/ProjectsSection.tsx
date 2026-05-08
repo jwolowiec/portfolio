@@ -4,7 +4,7 @@ import {LuArrowRight} from "react-icons/lu";
 import BentoContainer from "@/components/ui/BentoContainer";
 import {Link} from "@/i18n/navigation";
 import {getLocale, getTranslations} from "next-intl/server";
-import {getLocalizedProjects} from "@/lib/data/projects";
+import {getLocalizedProjects} from "@/lib/data/projects/projects";
 
 export default async function ProjectsSection() {
     const [section, common, locale] = await Promise.all([

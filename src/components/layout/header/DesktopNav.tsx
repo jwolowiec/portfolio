@@ -21,7 +21,9 @@ export default function DesktopNav() {
                 <div></div>
                 <ul className="flex items-center bg-neutral-900/80 backdrop-blur-md border border-neutral-800 rounded-3xl p-2 gap-3">
                     {navLinks.map((link) => {
-                        const isActive = path === link.href;
+                        const isActive = link.href === '/'
+                            ? path === '/'
+                            : path.startsWith(link.href);
 
                         return (
                             <li key={link.href}

@@ -1,32 +1,46 @@
 import prisma from "@/lib/prisma/prisma";
-import { defaultLocale, locales } from "@/constants/locales";
 
 export async function getLocalizedProjects(locale: string) {
-    const validLocale = (locales as readonly string[]).includes(locale)
-        ? locale
-        : defaultLocale;
-
     const projects = await prisma.project.findMany({
         where: {
             labels: {
-                some: {}
+                some: { language: locale }
             }
         },
         include: {
             image: true,
-            labels: true,
+            labels: {
+                where: { language: locale }
+            }
         }
     });
 
     return projects.map((project) => {
-        const targetLabel =
-            project.labels.find((l) => l.language === validLocale) ||
-            project.labels.find((l) => l.language === defaultLocale) ||
-            project.labels[0];
-
+        const { labels, ...rest } = project;
         return {
-            ...project,
-            label: targetLabel
+            ...rest,
+            label: labels[0]
         };
     });
+}
+
+export async function getLocalizedProjectById(locale: string, id: string) {
+    const project = await prisma.project.findUnique({
+        where: { id },
+        include: {
+            image: true,
+            labels: {
+                where: { language: locale }
+            }
+        }
+    });
+
+    if (!project || project.labels.length === 0) return null;
+
+    const { labels, ...rest } = project;
+
+    return {
+        ...rest,
+        label: labels[0]
+    }
 }

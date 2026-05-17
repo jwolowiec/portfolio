@@ -110,6 +110,7 @@ export default function ProjectContainer({project, isReversed, priority}: Projec
                     <Button
                         className="flex-1 flex flex-row gap-3"
                         variant="secondary"
+                        href={`/projects/${project.id}/${project.label.slug}`}
                     >
                         <span>{t("moreInfo")}</span><FaInfoCircle/>
                     </Button>

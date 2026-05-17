@@ -37,6 +37,7 @@ model Label {
   language        String
   name            String
   description     String
+  content         String
   characteristics String[]
 
   @@unique([projectId, language])

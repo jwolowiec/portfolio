@@ -56,7 +56,9 @@ export default function MobileNav() {
                             className="absolute z-9 w-full h-full -top-1/2 bg-neutral-900 border border-neutral-800 rounded-b-2xl flex flex-col justify-end p-4">
                             <ul className="h-1/2 flex flex-col justify-center gap-5 text-xl text-center">
                                 {navLinks.map((link) => {
-                                    const isActive = path === link.href;
+                                    const isActive = link.href === '/'
+                                        ? path === '/'
+                                        : path.startsWith(link.href);
 
                                     return (
                                         <motion.li

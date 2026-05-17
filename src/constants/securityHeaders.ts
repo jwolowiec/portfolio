@@ -1,4 +1,5 @@
-const isDev = process.env.NODE_ENV === 'development'
+const isDev = process.env.NODE_ENV === 'development';
+const isHostedProd = process.env.IS_HOSTED === 'true';
 
 const cspHeader = `
     default-src 'self';
@@ -11,18 +12,26 @@ const cspHeader = `
     form-action 'self';
     frame-ancestors 'none';
     frame-src 'self' https://challenges.cloudflare.com;
-    ${!isDev ? "upgrade-insecure-requests;" : ""}
+    ${isDev ? "connect-src 'self' ws: wss:;" : ""} 
+    ${isHostedProd ? "upgrade-insecure-requests;" : ""}
 `.replace(/\s{2,}/g, ' ').trim();
 
-export const securityHeaders = [
+const baseHeaders = [
     { key: "Content-Security-Policy", value: cspHeader },
-    { key: "Strict-Transport-Security", value: "max-age=63072000; includeSubDomains; preload" },
-    { key: "X-Frame-Options", value: "DENY" },
     { key: "X-Content-Type-Options", value: "nosniff" },
+    { key: "X-Frame-Options", value: "DENY" },
     { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
     { key: "X-XSS-Protection", value: "0" },
-    { key: "Permissions-Policy", value: "camera=(), microphone=(), geolocation=(), interest-cohort=()" },
-    { key: "X-DNS-Prefetch-Control", value: "off" },
+    { key: "Permissions-Policy", value: "camera=(), microphone=(), geolocation=(), payment=(), interest-cohort=()" },
+    { key: "X-DNS-Prefetch-Control", value: "off" }
+];
+
+const strictHostedHeaders = [
+    { key: "Strict-Transport-Security", value: "max-age=31536000; includeSubDomains; preload" },
     { key: "Cross-Origin-Opener-Policy", value: "same-origin" },
     { key: "Cross-Origin-Resource-Policy", value: "same-site" }
-]
+];
+
+export const securityHeaders = isHostedProd
+    ? [...baseHeaders, ...strictHostedHeaders]
+    : baseHeaders;

@@ -103,7 +103,7 @@ export default function ProjectCard({project, index}: ProjectCardProps) {
                                         <Button
                                             variant="secondary"
                                             size="sm"
-                                            href="/projects"
+                                            href={`/projects/${project.id}/${project.label.slug}`}
                                         >
                                             {t("projectDescriptionButton")}
                                         </Button>

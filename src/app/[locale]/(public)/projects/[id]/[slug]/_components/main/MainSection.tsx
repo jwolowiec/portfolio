@@ -17,7 +17,7 @@ export default function MainSection({name, content}: MainSectionProps) {
                 variants={mainVariants}
                 initial="hidden"
                 whileInView="visible"
-                viewport={{once: true, amount: 0.4}}
+                viewport={{once: true, amount: 0.2}}
                 className="flex flex-col gap-5"
             >
                 <motion.h1

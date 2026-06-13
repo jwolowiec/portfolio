@@ -1,0 +1,77 @@
+{
+  "header": "O mnie",
+  "ImageSection": {
+    "photo": "zdjęcie"
+  },
+  "AboutMeSection": {
+    "header": "O mnie",
+    "studentParagraph": "Jestem studentem informatyki na <highlight>Politechnice Poznańskiej</highlight> oraz aktywnym członkiem koła naukowego <highlight>AKAI</highlight>. Zajmuję się tworzeniem aplikacji webowych oraz innego oprogramowania. Projekty realizuję <highlight>kompleksowo</highlight>, odpowiadam za każdy etap, zaczynając od projektowania, przez pisanie kodu, aż po konfigurację i uruchamianie aplikacji w środowisku produkcyjnym.",
+    "technologyParagraph": "Najczęściej w swoich projektach używam <highlight>JavaScript i TypeScript</highlight>, ale inne technologie, takie jak <highlight>Java i Python</highlight>, nie są mi straszne. Posiadam również wiedzę z zakresu baz danych <highlight>SQL i NoSQL</highlight>, które powszechnie wykorzystuję w moich projektach.",
+    "scrollToDocs": "Zobacz CV"
+  },
+  "EducationSection": {
+    "header": "Edukacja",
+    "university": {
+      "date": "2023 - Obecnie",
+      "title": "Politechnika Poznańska",
+      "subtitle": "Informatyka"
+    },
+    "school": {
+      "date": "2019 - 2023",
+      "title": "Technikum Informatyczne SCI",
+      "subtitle": "Technik Informatyk"
+    }
+  },
+  "HorizonsSection": {
+    "header": "Moje horyzonty",
+    "deploymentParagraph": "Ciągły rozwój jest dla mnie ważny, dlatego nie ograniczam się tylko do technologii webowych. Jednym z ciekawszych dla mnie zagadnień jest rola <highlight>DevOps</highlight>. Niestraszny mi wiersz poleceń w systemie <highlight>Linux</highlight> ani konfiguracja narzędzi niezbędnych do funkcjonowania projektów. To wszystko jest związane z bezpieczeństwem. Dbam o to, żeby moje aplikacje i projekty nie były narażone na zagrożenia z zewnątrz.",
+    "otherTechnologiesParagraph": "JavaScript i TypeScript to nie wszystko, więc inne języki, takie jak <highlight>Java, Python oraz C++</highlight>, nie są mi obce. Mam za sobą projekty z wykorzystaniem <highlight>Spring Boot, Flask oraz PyTorch</highlight>. Nie ograniczam się tylko do oprogramowania. Zabawa z takimi platformami jak <highlight>Raspberry Pi oraz Arduino</highlight> sprawiła mi dużo frajdy oraz pozwoliła mi zmierzyć się z wyzwaniami, jakie generuje sam sprzęt."
+  },
+  "AfterHoursSection": {
+    "header": "Po godzinach",
+    "paragraph": "Programowanie to dla mnie nie wszystko. Gra zespołowa oraz dobra zabawa też są ważne, dlatego jestem członkiem koła naukowego <highlight>AKAI</highlight>, które zrzesza pasjonatów o podobnych zainteresowaniach. Poza tym jeżdżę ze znajomymi na hackathony, gdzie moim największym sukcesem były dwa finały największego tego typu wydarzenia w Europie - <highlight>HackYeah</highlight>.",
+    "hobbies": {
+      "header": "Zainteresowania",
+      "football": "Piłka nożna",
+      "videoGames": "Gry wideo",
+      "starWars": "Uniwersum Gwiezdnych Wojen"
+    }
+  },
+  "DocumentsSection": {
+    "header": "Moje kwalifikacje",
+    "certificates": {
+      "header": "Certyfikaty",
+      "items": {
+        "cisco": {
+          "title": "Introduction to Cybersecurity",
+          "subtitle": "Cisco"
+        },
+        "ic3": {
+          "title": "IC3 - Global Standard 4",
+          "subtitle": "Certyfikacja kompetencji cyfrowych"
+        },
+        "acert": {
+          "title": "ACERT",
+          "subtitle": "Język Angielski dla inżynierów"
+        }
+      }
+    },
+    "languages": {
+      "header": "Języki obce",
+      "items": {
+        "polish": {
+          "name": "Polski",
+          "level": "ojczysty"
+        },
+        "english": {
+          "name": "Angielski",
+          "level": "B2"
+        },
+        "german": {
+          "name": "Niemiecki",
+          "level": "A2"
+        }
+      }
+    }
+  }
+}

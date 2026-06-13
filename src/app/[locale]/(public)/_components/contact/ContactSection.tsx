@@ -15,6 +15,7 @@ import {useTranslations} from "next-intl";
 import FullscreenModal from "@/components/ui/FullscreenModal";
 import {useState} from "react";
 import ContactForm from "@/components/features/ContactForm";
+import {personalInfo} from "@/constants/personalInfo";
 
 export default function ContactSection() {
     const t = useTranslations("homePage.ContactSection");
@@ -128,7 +129,7 @@ export default function ContactSection() {
                             variants={buttonVariants}
                         >
                             <Button
-                                href="https://www.linkedin.com/in/jakub-wołowiec/"
+                                href={personalInfo.linkedin}
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 size="xl"
@@ -143,7 +144,7 @@ export default function ContactSection() {
                             variants={buttonVariants}
                         >
                             <Button
-                                href="https://github.com/jwolowiec"
+                                href={personalInfo.github}
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 size="xl"

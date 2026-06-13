@@ -24,7 +24,7 @@ export default function Footer() {
         <footer>
             <Container className="mt-1 text-neutral-400">
                 <BentoContainer className="flex flex-col gap-6">
-                    <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 px-4">
+                    <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                         <FooterColumn title={t("shortcuts")}>
                             <nav>
                                 <ul className="flex flex-col">

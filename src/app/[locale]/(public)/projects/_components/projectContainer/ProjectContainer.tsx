@@ -70,7 +70,7 @@ export default function ProjectContainer({project, isReversed, priority}: Projec
                         );
                     })}
                 </motion.div>
-                <hr className="border border-neutral-800 group-hover:border-green-500/30 transition-all duration-300"/>
+                <hr className="border-neutral-800 group-hover:border-green-500/30 transition-all duration-300"/>
                 <div
                     className="grow flex flex-col gap-4"
                 >

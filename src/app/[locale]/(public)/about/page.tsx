@@ -1,11 +1,11 @@
 import {setRequestLocale} from "next-intl/server";
 import {use} from "react";
-import ImageSection from "./_components/ImageSection";
-import AboutMeSection from "./_components/AboutMeSection";
-import EducationSection from "./_components/EducationSection";
-import HorizonsSection from "./_components/HorizonsSection";
-import AfterHoursSection from "./_components/AfterHoursSection";
-import DocumentsSection from "./_components/DocumentsSection";
+import ImageSection from "./_components/image/ImageSection";
+import AboutMeSection from "./_components/about/AboutMeSection";
+import EducationSection from "./_components/education/EducationSection";
+import HorizonsSection from "./_components/horizon/HorizonsSection";
+import AfterHoursSection from "./_components/afterHours/AfterHoursSection";
+import DocumentsSection from "./_components/documents/DocumentsSection";
 import {useTranslations} from "next-intl";
 
 export default function Page({params}: { params: Promise<{ locale: string }> }) {

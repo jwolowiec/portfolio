@@ -6,7 +6,8 @@ import {useTranslations} from "next-intl";
 import {FaGithub, FaLinkedin} from "react-icons/fa6";
 import {personalInfo} from "@/constants/personalInfo";
 import {motion} from "framer-motion";
-import {containerVariants, fadeUpVariants} from "./animations";
+import {fadeMoveVariants, staggerContainerVariants} from "@/lib/animations/variants";
+import {duration, viewport} from "@/lib/animations/constants";
 
 export default function AboutMeSection() {
     const t = useTranslations("aboutPage.AboutMeSection");
@@ -16,14 +17,20 @@ export default function AboutMeSection() {
             className="row-span-2 col-span-full md:col-span-4 lg:col-span-5"
         >
             <motion.div
-                variants={containerVariants}
+                variants={staggerContainerVariants}
+                custom={{
+                    customStagger: duration.short
+                }}
                 initial="hidden"
                 whileInView="visible"
-                viewport={{once: true, amount: 0.2}}
+                viewport={{once: true, amount: viewport.short}}
                 className="flex flex-col justify-between gap-4"
             >
                 <motion.h2
-                    variants={fadeUpVariants}
+                    variants={fadeMoveVariants}
+                    custom={{
+                        startY: 15
+                    }}
                     className="text-2xl font-medium"
                 >
                     {t("header")}
@@ -32,7 +39,10 @@ export default function AboutMeSection() {
                 <hr className="border-neutral-800 group-hover:border-green-500/30 transition-colors duration-300"/>
 
                 <motion.p
-                    variants={fadeUpVariants}
+                    variants={fadeMoveVariants}
+                    custom={{
+                        startY: 15
+                    }}
                     className="leading-relaxed text-lg"
                 >
                     {t.rich("studentParagraph", {
@@ -40,7 +50,10 @@ export default function AboutMeSection() {
                     })}
                 </motion.p>
                 <motion.p
-                    variants={fadeUpVariants}
+                    variants={fadeMoveVariants}
+                    custom={{
+                        startY: 15
+                    }}
                     className="leading-relaxed text-lg"
                 >
                     {t.rich("technologyParagraph", {
@@ -48,7 +61,10 @@ export default function AboutMeSection() {
                     })}
                 </motion.p>
                 <motion.div
-                    variants={fadeUpVariants}
+                    variants={fadeMoveVariants}
+                    custom={{
+                        startY: 15
+                    }}
                     className="flex flex-row gap-3"
                 >
                     <Button

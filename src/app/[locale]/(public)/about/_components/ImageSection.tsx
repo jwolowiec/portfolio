@@ -5,7 +5,8 @@ import mainImg from "@public/main-img.jpg";
 import BentoContainer from "@/components/ui/BentoContainer";
 import {useTranslations} from "next-intl";
 import { motion } from "framer-motion";
-import {containerVariants, headerVariants, imageVariants} from "./animations";
+import {fadeInVariants, fadeMoveVariants, fadeStaggerContainerVariants} from "@/lib/animations/variants";
+import {duration} from "@/lib/animations/constants";
 
 export default function ImageSection() {
     const t = useTranslations("aboutPage.ImageSection");
@@ -16,13 +17,16 @@ export default function ImageSection() {
         >
             <motion.div
                 className="flex flex-col gap-4"
-                variants={containerVariants}
+                variants={fadeStaggerContainerVariants}
+                custom={{
+                    customStagger: duration.short
+                }}
                 initial="hidden"
                 whileInView="visible"
                 viewport={{once: true, amount: 0.4}}
             >
                 <motion.div
-                    variants={imageVariants}
+                    variants={fadeInVariants}
                 >
                     <Image
                         className="border-3 border-green-500/30 w-56 h-56 md:w-64 md:h-64 rounded-full object-cover object-top"
@@ -33,7 +37,10 @@ export default function ImageSection() {
                     />
                 </motion.div>
                 <motion.h2
-                    variants={headerVariants}
+                    variants={fadeMoveVariants}
+                    custom={{
+                        startY: 20
+                    }}
                     className="text-3xl lg:text-4xl font-bold group-hover:text-green-400 transition-colors duration-400"
                 >
                     Jakub Wołowiec

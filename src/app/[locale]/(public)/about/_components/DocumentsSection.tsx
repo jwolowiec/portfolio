@@ -2,9 +2,9 @@
 
 import BentoContainer from "@/components/ui/BentoContainer";
 import {useMessages, useTranslations} from "next-intl";
-import {fadeUpVariants} from "./animations";
 import {motion} from "framer-motion";
-import {containerVariants} from "./animations";
+import {fadeMoveVariants, staggerContainerVariants} from "@/lib/animations/variants";
+import {duration, viewport} from "@/lib/animations/constants";
 
 export default function DocumentsSection() {
     const t = useTranslations("aboutPage.DocumentsSection");
@@ -16,14 +16,20 @@ export default function DocumentsSection() {
     return (
         <BentoContainer className="row-span-1 col-span-full">
             <motion.div
-                variants={containerVariants}
+                variants={staggerContainerVariants}
+                custom={{
+                    customStagger: duration.short
+                }}
                 initial="hidden"
                 whileInView="visible"
-                viewport={{once: true, amount: 0.2}}
+                viewport={{once: true, amount: viewport.short}}
                 className="flex flex-col gap-4"
             >
                 <motion.h2
-                    variants={fadeUpVariants}
+                    variants={fadeMoveVariants}
+                    custom={{
+                        startY: 15
+                    }}
                     className="text-2xl font-medium"
                 >
                     {t("header")}
@@ -33,7 +39,10 @@ export default function DocumentsSection() {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <motion.div
-                        variants={fadeUpVariants}
+                        variants={fadeMoveVariants}
+                        custom={{
+                            startY: 15
+                        }}
                         className="flex flex-col gap-2"
                     >
                         <h3 className="text-green-400 text-lg">{t("certificates.header")}</h3>
@@ -51,7 +60,10 @@ export default function DocumentsSection() {
                     </motion.div>
 
                     <motion.div
-                        variants={fadeUpVariants}
+                        variants={fadeMoveVariants}
+                        custom={{
+                            startY: 15
+                        }}
                         className="flex flex-col gap-2"
                     >
                         <h3 className="text-green-400 text-lg">{t(`languages.header`)}</h3>

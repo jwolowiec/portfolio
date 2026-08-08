@@ -3,7 +3,8 @@
 import BentoContainer from "@/components/ui/BentoContainer";
 import { motion } from "framer-motion";
 import {useTranslations} from "next-intl";
-import {containerVariants, fadeUpVariants} from "./animations";
+import {fadeMoveVariants, staggerContainerVariants} from "@/lib/animations/variants";
+import {duration, viewport} from "@/lib/animations/constants";
 
 export default function EducationSection() {
     const t = useTranslations("aboutPage.EducationSection");
@@ -11,14 +12,20 @@ export default function EducationSection() {
     return (
         <BentoContainer className="row-span-1 col-span-full">
             <motion.div
-                variants={containerVariants}
+                variants={staggerContainerVariants}
+                custom={{
+                    customStagger: duration.short
+                }}
                 initial="hidden"
                 whileInView="visible"
-                viewport={{once: true, amount: 0.2}}
+                viewport={{once: true, amount: viewport.short}}
                 className="flex flex-col gap-4"
             >
                 <motion.h2
-                    variants={fadeUpVariants}
+                    variants={fadeMoveVariants}
+                    custom={{
+                        startY: 15
+                    }}
                     className="text-2xl font-medium"
                 >
                     {t("header")}
@@ -27,7 +34,10 @@ export default function EducationSection() {
                     className="flex flex-col md:flex-row justify-between md:items-center gap-6 max-md:border-l-2 max-md:border-green-500/30 max-md:pl-4"
                 >
                     <motion.div
-                        variants={fadeUpVariants}
+                        variants={fadeMoveVariants}
+                        custom={{
+                            startY: 15
+                        }}
                         className="flex flex-col"
                     >
                         <p className="text-green-400">{t("school.date")}</p>
@@ -38,7 +48,10 @@ export default function EducationSection() {
                     <hr className="hidden md:block grow border-green-500/30"/>
 
                     <motion.div
-                        variants={fadeUpVariants}
+                        variants={fadeMoveVariants}
+                        custom={{
+                            startY: 15
+                        }}
                         className="flex flex-col md:text-right"
                     >
                         <p className="text-green-400">{t("university.date")}</p>

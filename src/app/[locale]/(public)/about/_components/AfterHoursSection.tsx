@@ -5,7 +5,8 @@ import {FaJediOrder} from "react-icons/fa6";
 import BentoContainer from "@/components/ui/BentoContainer";
 import {useTranslations} from "next-intl";
 import { motion } from "framer-motion";
-import {containerVariants, fadeUpVariants} from "./animations";
+import {fadeMoveVariants, staggerContainerVariants} from "@/lib/animations/variants";
+import {duration, viewport} from "@/lib/animations/constants";
 
 export default function AfterHoursSection() {
     const t = useTranslations("aboutPage.AfterHoursSection");
@@ -13,14 +14,20 @@ export default function AfterHoursSection() {
     return (
         <BentoContainer className="row-span-2 col-span-full md:col-span-3 lg:col-span-4">
             <motion.div
-                variants={containerVariants}
+                variants={staggerContainerVariants}
+                custom={{
+                    customStagger: duration.short
+                }}
                 initial="hidden"
                 whileInView="visible"
-                viewport={{once: true, amount: 0.2}}
+                viewport={{once: true, amount: viewport.short}}
                 className="flex flex-col gap-4"
             >
                 <motion.h2
-                    variants={fadeUpVariants}
+                    variants={fadeMoveVariants}
+                    custom={{
+                        startY: 15
+                    }}
                     className="text-2xl font-medium"
                 >
                     {t("header")}
@@ -29,7 +36,10 @@ export default function AfterHoursSection() {
                 <hr className="border-neutral-800 group-hover:border-green-500/30 transition-colors duration-300"/>
 
                 <motion.p
-                    variants={fadeUpVariants}
+                    variants={fadeMoveVariants}
+                    custom={{
+                        startY: 15
+                    }}
                     className="leading-relaxed"
                 >
                     {t.rich("paragraph", {
@@ -38,7 +48,10 @@ export default function AfterHoursSection() {
                 </motion.p>
 
                 <motion.div
-                    variants={fadeUpVariants}
+                    variants={fadeMoveVariants}
+                    custom={{
+                        startY: 15
+                    }}
                     className="flex flex-col gap-1"
                 >
                     <h3 className="text-green-400 text-lg">{t("hobbies.header")}</h3>

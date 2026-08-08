@@ -2,12 +2,6 @@
 
 import BentoContainer from "@/components/ui/BentoContainer";
 import {AnimatePresence, motion} from "framer-motion";
-import {
-    buttonContainerVariants, buttonVariants,
-    containerVariants,
-    paragraphVariants,
-    textWritingVariants
-} from "./animations";
 import TypeWriter from "@/components/ui/TypeWriter";
 import Button from "@/components/ui/button/Button";
 import {FaEnvelope, FaGithub, FaLinkedin, FaRegCircleCheck} from "react-icons/fa6";
@@ -16,6 +10,13 @@ import FullscreenModal from "@/components/ui/FullscreenModal";
 import {useState} from "react";
 import ContactForm from "@/components/features/ContactForm";
 import {personalInfo} from "@/constants/personalInfo";
+import {duration, transition, viewport} from "@/lib/animations/constants";
+import {
+    blurVariants, fadeInVariants,
+    fadeMoveVariants,
+    fadeStaggerContainerVariants,
+    staggerContainerVariants
+} from "@/lib/animations/variants";
 
 export default function ContactSection() {
     const t = useTranslations("homePage.ContactSection");
@@ -32,14 +33,22 @@ export default function ContactSection() {
     return (
         <BentoContainer className="col-span-full md:col-span-4 lg:col-span-5 row-span-2 flex flex-col">
             <motion.div
-                variants={containerVariants}
+                variants={fadeStaggerContainerVariants}
+                custom={{
+                    customTransition: transition.slow,
+                    customStagger: duration.medium
+                }}
                 initial="hidden"
                 whileInView="visible"
-                viewport={{once: true, amount: 0.4}}
+                viewport={{once: true, amount: viewport.medium}}
                 className="grow flex flex-col justify-center items-center gap-5 p-6 text-center"
             >
                 <motion.h2
-                    variants={textWritingVariants}
+                    variants={fadeStaggerContainerVariants}
+                    custom={{
+                        customTransition: transition.fast,
+                        customStagger: duration.micro * 1.5
+                    }}
                     className="text-4xl md:text-5xl lg:text-5xl font-extrabold"
                 >
                     {t.rich("header", {
@@ -48,7 +57,10 @@ export default function ContactSection() {
                     })}
                 </motion.h2>
                 <motion.p
-                    variants={paragraphVariants}
+                    variants={blurVariants}
+                    custom={{
+                        transition: transition.fast
+                    }}
                     className="text-lg md:text-xl font-bold"
                 >
                     {t.rich("paragraph", {
@@ -56,11 +68,18 @@ export default function ContactSection() {
                     })}
                 </motion.p>
                 <motion.div
-                    variants={buttonContainerVariants}
+                    variants={staggerContainerVariants}
+                    custom={{
+                        customStagger: duration.short
+                    }}
                     className="flex flex-row flex-wrap gap-3 justify-center items-center"
                 >
                     <motion.div
-                        variants={buttonVariants}
+                        variants={fadeMoveVariants}
+                        custom={{
+                            customTransition: transition.spring,
+                            startY: "2rem"
+                        }}
                     >
                         <Button
                             size="xl"
@@ -81,10 +100,7 @@ export default function ContactSection() {
                                         opacity: isSuccess ? 0 : 1,
                                         pointerEvents: isSuccess ? "none" : "auto"
                                     }}
-                                    transition={{
-                                        ease: "easeInOut",
-                                        duration: 0.4
-                                    }}
+                                    transition={transition.fast}
                                 >
                                     <ContactForm
                                         onSuccess={() => {
@@ -97,17 +113,13 @@ export default function ContactSection() {
                                     {isSuccess && (
                                         <motion.div
                                             key="messageSuccess"
-                                            initial={{
-                                                opacity: 0,
+                                            variants={fadeInVariants}
+                                            custom={{
+                                                customTransition: transition.fast,
+                                                customDelay: duration.medium
                                             }}
-                                            animate={{
-                                                opacity: 1,
-                                            }}
-                                            transition={{
-                                                ease: "easeInOut",
-                                                duration: 0.4,
-                                                delay: 0.4
-                                            }}
+                                            initial="hidden"
+                                            animate="visible"
                                             className="absolute inset-0 flex flex-col justify-center items-center gap-5 text-green-400"
                                         >
                                             <FaRegCircleCheck size={96}/>
@@ -126,7 +138,11 @@ export default function ContactSection() {
                     </motion.div>
                     <div className="flex flex-row gap-3">
                         <motion.div
-                            variants={buttonVariants}
+                            variants={fadeMoveVariants}
+                            custom={{
+                                customTransition: transition.spring,
+                                startY: "2rem"
+                            }}
                         >
                             <Button
                                 href={personalInfo.linkedin}
@@ -141,7 +157,11 @@ export default function ContactSection() {
                             </Button>
                         </motion.div>
                         <motion.div
-                            variants={buttonVariants}
+                            variants={fadeMoveVariants}
+                            custom={{
+                                customTransition: transition.spring,
+                                startY: "2rem"
+                            }}
                         >
                             <Button
                                 href={personalInfo.github}

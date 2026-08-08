@@ -4,9 +4,10 @@ import BentoContainer from "@/components/ui/BentoContainer";
 import {motion} from "framer-motion";
 import TypeWriter from "@/components/ui/TypeWriter";
 import {workTimeline} from "./data";
-import {timelineVariants, textContainerVariants} from "./animations";
 import {useTranslations} from "next-intl";
 import ProcessStep from "./ProcessStep";
+import {duration, transition, viewport} from "@/lib/animations/constants";
+import {fadeInVariants, fadeStaggerContainerVariants} from "@/lib/animations/variants";
 
 export default function ProcessSection() {
     const t = useTranslations("homePage.ProcessSection");
@@ -15,10 +16,13 @@ export default function ProcessSection() {
         <BentoContainer
             className="col-span-full md:col-span-2 lg:col-span-3 row-span-2 flex flex-col gap-4">
             <motion.div
-                variants={textContainerVariants}
+                variants={fadeStaggerContainerVariants}
+                custom={{
+                    customStagger: duration.micro,
+                }}
                 initial="hidden"
                 whileInView="visible"
-                viewport={{once: true, amount: 0.4}}
+                viewport={{once: true, amount: viewport.medium}}
                 className="flex flex-col gap-3 text-2xl/10 lg:text-3xl/10 font-extrabold text-neutral-200"
             >
                 <h2>{t.rich("headline", {
@@ -28,10 +32,14 @@ export default function ProcessSection() {
             </motion.div>
 
             <motion.div
-                variants={timelineVariants}
+                variants={fadeInVariants}
+                custom={{
+                    customTransition: transition.slow,
+                    customDelay: duration.short,
+                }}
                 initial="hidden"
                 whileInView="visible"
-                viewport={{once: true, amount: 0.4}}
+                viewport={{once: true, amount: viewport.medium}}
                 className="grow flex flex-col"
             >
                 {workTimeline.map((item, index) => {

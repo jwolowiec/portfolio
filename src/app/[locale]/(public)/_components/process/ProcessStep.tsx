@@ -1,9 +1,10 @@
 "use client";
 
 import {motion} from "framer-motion";
-import {itemVariants, lineVariants} from "./animations";
 import Pill from "@/components/ui/Pill";
 import {IconType} from "react-icons";
+import {blurVariants, scaleVariants} from "@/lib/animations/variants";
+import {duration, transition} from "@/lib/animations/constants";
 
 interface TimelineItemProps {
     index: number
@@ -20,23 +21,32 @@ export default function ProcessStep({index, label, Icon, technologies, isLast = 
         >
             <div className="flex flex-col items-center">
                 <motion.span
-                    custom={index}
-                    variants={itemVariants}
+                    variants={blurVariants}
+                    custom={{
+                        customTransition: transition.fast,
+                        customDelay: index * duration.long
+                    }}
                     className="bg-neutral-900/80 backdrop-blur-md text-green-400 p-2 border border-green-500/20 rounded-full"
                 >
                     <Icon size={12}/>
                 </motion.span>
                 {!isLast ? (
                     <motion.div
-                        custom={index}
-                        variants={lineVariants}
+                        variants={scaleVariants}
+                        custom={{
+                            customDelay: (index * duration.long) + duration.medium,
+                            y: 0
+                        }}
                         className="grow w-px bg-neutral-600 origin-top"
                     />
                 ) : null}
             </div>
             <motion.div
-                custom={index}
-                variants={itemVariants}
+                variants={blurVariants}
+                custom={{
+                    customTransition: transition.fast,
+                    customDelay: index * duration.long
+                }}
                 className="flex flex-col gap-2"
             >
                 <h3 className="text-lg">{label}</h3>

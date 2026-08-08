@@ -5,10 +5,11 @@ import Button from "@/components/ui/button/Button";
 import Pill from "@/components/ui/Pill";
 import {LuChevronUp} from "react-icons/lu";
 import {useState} from "react";
-import {AnimatePresence, motion} from "framer-motion";
-import {containerVariants} from "./animations";
+import {motion} from "framer-motion";
 import {useTranslations} from "next-intl";
 import {LocalizedProject} from "@/types/project";
+import {fadeInVariants} from "@/lib/animations/variants";
+import {duration, transition} from "@/lib/animations/constants";
 
 interface ProjectCardProps{
     project: LocalizedProject;
@@ -21,8 +22,8 @@ export default function ProjectCard({project, index}: ProjectCardProps) {
 
     return (
         <motion.div
-            variants={containerVariants}
-            custom={index}
+            variants={fadeInVariants}
+            custom={{customDelay: index * duration.short}}
             initial="hidden"
             whileInView="visible"
             viewport={{once: true, amount: 0.4}}
@@ -58,39 +59,22 @@ export default function ProjectCard({project, index}: ProjectCardProps) {
                 <motion.div
                     initial={false}
                     animate={{ flexGrow: isExpanded ? 1 : 0 }}
-                    transition={{
-                        duration: 0.3,
-                        ease: "easeInOut",
-                        delay: isExpanded ? 0 : 0.2
-                    }}
-                    className={`
+                    transition={transition.fast}
+                    className="
                         bg-neutral-900/80 backdrop-blur-md border border-neutral-500/30
-                        p-3 rounded-xl w-full flex flex-col gap-2 overflow-hidden`}
+                        p-3 rounded-xl w-full flex flex-col gap-2 overflow-hidden"
                 >
                     <h3 className="text-lg text-center font-bold">{project.label.name}</h3>
-                    <AnimatePresence>
-                        {isExpanded && (
-                            <motion.div
-                                initial="collapsed"
-                                animate={isExpanded ? "expanded" : "collapsed"}
-                                variants={{
-                                    expanded: {
-                                        opacity: 1,
-                                        display: "block",
-                                        transition: {
-                                            display: {delay: 0.3},
-                                            opacity: {duration: 0.2, delay: 0.3}
-                                        }
-                                    },
-                                    collapsed: {
-                                        opacity: 0,
-                                        transitionEnd: {display: "none"},
-                                        transition: {opacity: {duration: 0.3}}
-                                    }
-                                }}
-                                className="w-full h-full pt-2 overflow-y-auto scrollbar"
-                            >
-                                <div className="flex flex-col items-center gap-4 h-full min-h-0 w-full">
+                    {isExpanded && (
+                        <motion.div
+                            initial={{ opacity: 0, display: "none" }}
+                            animate={{ opacity: 1, display: "block" }}
+                            transition={{ 
+                                display: { delay: duration.medium }, 
+                                opacity: { duration: duration.short, delay: duration.medium } 
+                            }}
+                            className="w-full h-full pt-2 overflow-y-auto scrollbar"
+                        >    <div className="flex flex-col items-center gap-4 h-full min-h-0 w-full">
                                     <div className="flex flex-row gap-2">
                                         <Button
                                             size="sm"
@@ -119,7 +103,6 @@ export default function ProjectCard({project, index}: ProjectCardProps) {
                                 </div>
                             </motion.div>
                         )}
-                    </AnimatePresence>
                 </motion.div>
             </div>
         </motion.div>

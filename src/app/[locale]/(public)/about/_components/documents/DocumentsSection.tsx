@@ -4,7 +4,7 @@ import BentoContainer from "@/components/ui/BentoContainer";
 import {useMessages, useTranslations} from "next-intl";
 import {fadeUpVariants} from "./animations";
 import {motion} from "framer-motion";
-import {containerVariants} from "@/app/[locale]/(public)/about/_components/afterHours/animations";
+import {containerVariants} from "./animations";
 
 export default function DocumentsSection() {
     const t = useTranslations("aboutPage.DocumentsSection");
@@ -14,7 +14,7 @@ export default function DocumentsSection() {
     const languageKeys = Object.keys(messages.aboutPage.DocumentsSection.languages.items);
 
     return (
-        <BentoContainer id="docs" className="row-span-1 col-span-full">
+        <BentoContainer className="row-span-1 col-span-full">
             <motion.div
                 variants={containerVariants}
                 initial="hidden"
@@ -54,7 +54,7 @@ export default function DocumentsSection() {
                         variants={fadeUpVariants}
                         className="flex flex-col gap-2"
                     >
-                        <h3 className="text-green-400 text-lg">Języki obce</h3>
+                        <h3 className="text-green-400 text-lg">{t(`languages.header`)}</h3>
                         <ul className="flex flex-col gap-1">
                             {languageKeys.map((key) => {
                                 return (

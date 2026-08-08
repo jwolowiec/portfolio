@@ -1,11 +1,16 @@
 import Header from "@/components/layout/header/Header";
 import Container from "@/components/ui/Container";
 import Footer from "@/components/layout/footer/Footer";
-import {use} from "react";
 import {setRequestLocale} from "next-intl/server";
+import React from "react";
 
-export default function Layout({children, params}: { children: React.ReactNode, params: Promise<{locale: string}> }) {
-    const {locale} = use(params);
+interface Props {
+    children: React.ReactNode;
+    params: Promise<{locale: string}>
+}
+
+export default async function Layout({children, params}: Props) {
+    const {locale} = await params;
 
     setRequestLocale(locale);
     return (

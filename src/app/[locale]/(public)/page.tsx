@@ -3,12 +3,11 @@ import ProjectsSection from "./_components/projects/ProjectsSection";
 import ExperienceSection from "./_components/experience/ExperienceSection";
 import TechnologySection from "./_components/technology/TechnologySection";
 import ProcessSection from "./_components/process/ProcessSection";
-import ContactSection from "./_components/contact/ContactSection";
+import ContactSection from "./_components/ContactSection";
 import {setRequestLocale} from "next-intl/server";
-import {use} from "react";
 
-export default function Page({params}: {params: Promise<{locale: string}>}) {
-    const {locale} = use(params);
+export default async function Page({params}: {params: Promise<{locale: string}>}) {
+    const {locale} = await params;
 
     setRequestLocale(locale);
 

@@ -1,8 +1,9 @@
 "use client";
 
-import {itemVariants, timelineVariants} from "./animations";
 import {motion} from "framer-motion";
 import React from "react";
+import {fadeMoveVariants, fadeStaggerContainerVariants} from "@/lib/animations/variants";
+import {duration, viewport} from "@/lib/animations/constants";
 
 interface TimelineItemProps {
     title: string;
@@ -13,10 +14,11 @@ interface TimelineItemProps {
 export function Timeline({children}: {children: React.ReactNode}) {
     return (
         <motion.ol
-            variants={timelineVariants}
+            variants={fadeStaggerContainerVariants}
+            custom={{customStagger: duration.short}}
             initial="hidden"
             whileInView="visible"
-            viewport={{once: true, amount: 0.4}}
+            viewport={{once: true, amount: viewport.medium}}
             className="flex flex-col gap-4"
         >
             {children}
@@ -27,7 +29,8 @@ export function Timeline({children}: {children: React.ReactNode}) {
 export function TimelineItem({title, subtitle, date}: TimelineItemProps) {
     return (
         <motion.li
-            variants={itemVariants}
+            variants={fadeMoveVariants}
+            custom={{startY: -16}}
             className="flex flex-row items-center gap-4"
         >
             <div

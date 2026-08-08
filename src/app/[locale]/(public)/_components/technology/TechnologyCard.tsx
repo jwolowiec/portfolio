@@ -2,7 +2,8 @@
 
 import { AnimatePresence, motion } from "framer-motion";
 import { IconType } from "react-icons";
-import {itemVariants} from "./animations";
+import {fadeMoveVariants} from "@/lib/animations/variants";
+import {duration, viewport} from "@/lib/animations/constants";
 
 export interface Technology {
     name: string;
@@ -24,11 +25,11 @@ export default function TechnologyCard({ technology, index }: TechnologyCardProp
 
     return (
         <motion.div
-            custom={index}
-            variants={itemVariants}
+            variants={fadeMoveVariants}
+            custom={{startY: 15, customDelay: index * duration.fast}}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, amount: 0.7 }}
+            viewport={{ once: true, amount: viewport.xl }}
             className={`${getResponsiveDisplayClass(index)} justify-center items-center w-full h-full perspective-normal`}
         >
             <AnimatePresence mode="wait">
@@ -37,11 +38,11 @@ export default function TechnologyCard({ technology, index }: TechnologyCardProp
                     initial={{ rotateY: 90 }}
                     animate={{
                         rotateY: 0,
-                        transition: { duration: 0.2, ease: "easeOut" }
+                        transition: { duration: duration.short, ease: "easeOut" }
                     }}
                     exit={{
                         rotateY: -90,
-                        transition: { duration: 0.2, ease: "easeIn", delay: 0.2 * index }
+                        transition: { duration: duration.short, ease: "easeIn", delay: duration.short * index }
                     }}
                     className="flex flex-col justify-center items-center gap-2"
                 >

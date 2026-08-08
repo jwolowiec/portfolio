@@ -1,5 +1,5 @@
 import {getTranslations, setRequestLocale} from "next-intl/server";
-import ProjectContainer from "./_components/projectContainer/ProjectContainer";
+import ProjectContainer from "./_components/ProjectContainer";
 import {getLocalizedProjects} from "@/lib/data/projects/projects";
 
 export default async function Page({params}: {params: Promise<{locale: string}>}) {

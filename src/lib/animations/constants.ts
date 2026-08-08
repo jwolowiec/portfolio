@@ -9,6 +9,7 @@ export const duration = {
 } as const;
 
 export const transition = {
+    micro: { duration: duration.short, ease: "easeInOut" },
     fast: { duration: duration.medium, ease: "easeInOut" },
     default: { duration: duration.long, ease: "easeInOut" },
     slow: { duration: duration.xl, ease: "easeInOut" },

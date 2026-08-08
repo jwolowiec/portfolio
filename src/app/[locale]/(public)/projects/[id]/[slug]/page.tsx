@@ -5,8 +5,8 @@ import {notFound} from "next/navigation";
 import ImageSection from "./_components/ImageSection";
 import {FaArrowLeft} from "react-icons/fa6";
 import Container from "@/components/ui/Container";
-import MainSection from "./_components/main/MainSection";
-import SideSection from "./_components/side/SideSection";
+import MainSection from "./_components/MainSection";
+import SideSection from "./_components/SideSection";
 
 export default async function Page({params}: { params: Promise<{ locale: string, id: string, slug: string }> }) {
     const {locale, id, slug} = await params;

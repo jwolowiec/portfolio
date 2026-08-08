@@ -6,6 +6,8 @@ import {useState} from "react";
 import {MdFullscreen} from "react-icons/md";
 import Lightbox from "@/components/ui/Lightbox";
 import { motion } from "framer-motion";
+import {scaleVariants} from "@/lib/animations/variants";
+import {transition, viewport} from "@/lib/animations/constants";
 
 interface ImageSectionProps {
     src: string;
@@ -20,10 +22,14 @@ export default function ImageSection({src, alt}: ImageSectionProps) {
             className="col-span-full row-span-2"
         >
             <motion.div
-                initial={{opacity: 0, scale: 0.8}}
-                whileInView={{opacity: 1, scale: 1}}
-                viewport={{once: true, amount: 0.4}}
-                transition={{duration: 0.6, ease: "easeInOut"}}
+                variants={scaleVariants}
+                custom={{
+                    scale: 0.8,
+                }}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{once: true, amount: viewport.medium}}
+                transition={transition.default}
                 className="absolute inset-0"
             >
                 <Image

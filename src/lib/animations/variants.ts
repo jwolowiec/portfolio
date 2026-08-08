@@ -16,8 +16,9 @@ interface StaggerContainerProps extends VariantProps {
 }
 
 interface ScaleProps {
-    x?: number | string;
-    y?: number | string;
+    scale?: number | string;
+    scaleX?: number | string;
+    scaleY?: number | string;
 }
 
 export const fadeInVariants: Variants = {
@@ -84,10 +85,10 @@ export const blurVariants: Variants = {
 }
 
 export const scaleVariants: Variants = {
-    hidden: ({x = 1, y = 1}: ScaleProps = {}) => ({
+    hidden: ({scale = 1, scaleX = scale, scaleY = scale}: ScaleProps = {}) => ({
         opacity: 0,
-        scaleX: x,
-        scaleY: y,
+        scaleX,
+        scaleY,
     }),
     visible: ({customTransition = transition.default, customDelay = duration.none}: VariantProps = {}) => ({
         opacity: 1,

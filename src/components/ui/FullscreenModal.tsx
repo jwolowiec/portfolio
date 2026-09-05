@@ -16,11 +16,15 @@ interface ModalProps {
 export default function FullscreenModal({isOpen, onClose, children, label}: ModalProps) {
     useEffect(() => {
         if (isOpen) {
+            document.documentElement.style.overflow = "hidden";
             document.body.style.overflow = "hidden";
         } else {
+            document.documentElement.style.overflow = "";
             document.body.style.overflow = "";
         }
+
         return () => {
+            document.documentElement.style.overflow = "";
             document.body.style.overflow = "";
         };
     }, [isOpen]);
@@ -50,8 +54,8 @@ export default function FullscreenModal({isOpen, onClose, children, label}: Moda
                                 transition={{
                                     duration: 0.4
                                 }}
-                                className="relative max-h-[90vh] text-neutral-200 bg-neutral-900/80 backdrop-blur-md
-                                    border border-neutral-800 p-4 rounded-2xl overflow-x-auto divide-y divide-neutral-800"
+                                className="relative flex flex-col max-h-[90vh] text-neutral-200 bg-neutral-900/80 backdrop-blur-md
+                                    border border-neutral-800 p-4 rounded-2xl divide-y divide-neutral-800"
                             >
                                 <header
                                     className="flex flex-row justify-between items-center pb-4 mb-4"
@@ -63,7 +67,9 @@ export default function FullscreenModal({isOpen, onClose, children, label}: Moda
                                         className="cursor-pointer hover:scale-110"
                                     />
                                 </header>
-                                {children}
+                                <div className="overflow-y-auto scrollbar">
+                                    {children}
+                                </div>
                             </motion.div>
                         </Container>
                     </section>

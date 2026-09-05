@@ -2,9 +2,9 @@
 
 import BentoContainer from "@/components/ui/BentoContainer";
 import { motion } from "framer-motion";
-import ReactMarkdown from "react-markdown";
 import {duration, transition, viewport} from "@/lib/animations/constants";
 import {fadeInVariants, fadeStaggerContainerVariants, scaleVariants} from "@/lib/animations/variants";
+import MarkdownContainer from "@/components/ui/MarkdownContainer";
 
 interface MainSectionProps {
     name: string;
@@ -40,19 +40,10 @@ export default function MainSection({name, content}: MainSectionProps) {
                     className="origin-left border-neutral-800 group-hover:border-green-500/30 transition-colors duration-300"
                 />
 
-                <motion.div
+                <MarkdownContainer
+                    markdown={content}
                     variants={fadeInVariants}
-                    className="grow max-w-none prose prose-invert prose-green
-                            prose-headings:text-neutral-200 prose-headings:font-semibold
-                            prose-p:text-neutral-400
-                            prose-a:text-green-400 prose-a:hover:text-green-300 prose-a:transition-colors prose-a:duration-200
-                            prose-li:text-neutral-400 prose-li:marker:text-green-500/50"
-                >
-                    <ReactMarkdown>
-                        {content}
-                    </ReactMarkdown>
-
-                </motion.div>
+                />
             </motion.div>
         </BentoContainer>
     );

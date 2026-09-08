@@ -78,6 +78,7 @@ export default function ContactForm({onSuccess, onCancel}: ContactFormProps) {
     return (
         <form
             className="flex flex-col"
+            // eslint-disable-next-line react-hooks/refs -- False positive bug in React linter (see react/react#35062 and vercel/next.js/discussions/85677)
             onSubmit={handleSubmit(onSubmit)}
         >
             <AnimatePresence>

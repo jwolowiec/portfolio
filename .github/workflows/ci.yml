@@ -7,24 +7,72 @@ on:
   pull_request:
     branches:
       - main
+      - dev
 
 jobs:
-  test:
-    name: Run tests
+  build:
+    name: Build
     runs-on: ubuntu-latest
+    
+    services:
+      postgres:
+        image: postgres:15
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: password
+          POSTGRES_DB: portfolio
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '22'
-          cache: 'npm'
+      - name: Setup environment
+        uses: ./.github/actions/setup
 
-      - name: Install dependencies
-        run: npm ci
+      - name: Apply Database Schema
+        run: |
+          npx prisma generate
+          npx prisma db push
+          npx prisma db seed
+        env:
+          DATABASE_URL: postgresql://postgres:password@localhost:5432/portfolio?schema=public
+
+      - name: Build project
+        run: npm run build
+        env:
+          DATABASE_URL: postgresql://postgres:password@localhost:5432/portfolio?schema=public
+
+  lint:
+    name: Lint
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup environment
+        uses: ./.github/actions/setup
+
+      - name: Run linter
+        run: npm run lint
+
+  test:
+    name: Test
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup environment
+        uses: ./.github/actions/setup
 
       - name: Run tests
         run: npm run test:ci

@@ -23,5 +23,3 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
-          PR_AGENT__CONFIG__MODEL: "groq/llama3-70b-8192"
-          PR_AGENT__CONFIG__FALLBACK_MODELS: "groq/llama3-8b-8192"

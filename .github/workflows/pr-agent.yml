@@ -23,12 +23,3 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
-          config.model: "groq/groq/compound"
-          config.fallback_models: '["groq/groq/compound-mini"]'
-          config.custom_model_max_tokens: "70000"
-          pr_reviewer.require_score_review: "true"
-          pr_reviewer.require_security_review: "true"
-          pr_reviewer.require_todo_scan: "true"
-          github_action_config.auto_review: "true"
-          github_action_config.auto_describe: "true"
-          github_action_config.pr_actions: '["opened", "reopened", "ready_for_review", "review_requested", "synchronize"]'

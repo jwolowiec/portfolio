@@ -1,6 +1,6 @@
 "use client";
 
-import React, {useEffect, useEffectEvent, useState} from "react";
+import React, {useSyncExternalStore} from "react";
 import { createPortal } from "react-dom";
 
 interface ClientPortalProps {
@@ -8,18 +8,11 @@ interface ClientPortalProps {
 }
 
 export default function ClientPortal({ children }: ClientPortalProps) {
-    const [mounted, setMounted] = useState<boolean>(false);
-    const isClient = useEffectEvent((mounted: boolean) => {
-        setMounted(mounted)
-    })
-
-    useEffect(() => {
-        isClient(true);
-
-        return () => {
-            isClient(false);
-        }
-    }, []);
+    const mounted = useSyncExternalStore(
+        () => () => {},
+        () => true,
+        () => false
+    );
 
     if (!mounted) return null;
 

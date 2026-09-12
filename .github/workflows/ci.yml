@@ -19,7 +19,7 @@ jobs:
         image: postgres:15
         env:
           POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: password
+          POSTGRES_PASSWORD: postgres_ci_dummy
           POSTGRES_DB: portfolio
         ports:
           - 5432:5432
@@ -31,7 +31,7 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Setup environment
         uses: ./.github/actions/setup
@@ -42,12 +42,14 @@ jobs:
           npx prisma db push
           npx prisma db seed
         env:
-          DATABASE_URL: postgresql://postgres:password@localhost:5432/portfolio?schema=public
+          DATABASE_URL: postgresql://postgres:postgres_ci_dummy@localhost:5432/portfolio?schema=public
+          SHADOW_DATABASE_URL: postgresql://postgres:postgres_ci_dummy@localhost:5432/portfolio?schema=shadow
 
       - name: Build project
         run: npm run build
         env:
-          DATABASE_URL: postgresql://postgres:password@localhost:5432/portfolio?schema=public
+          DATABASE_URL: postgresql://postgres:postgres_ci_dummy@localhost:5432/portfolio?schema=public
+          SHADOW_DATABASE_URL: postgresql://postgres:postgres_ci_dummy@localhost:5432/portfolio?schema=shadow
 
   lint:
     name: Lint
@@ -55,7 +57,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Setup environment
         uses: ./.github/actions/setup
@@ -69,7 +71,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Setup environment
         uses: ./.github/actions/setup

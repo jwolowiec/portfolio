@@ -6,10 +6,6 @@ labels:
 assignees: ''
 ---
 
-## Description
-
-Task description
-
 ## What
 
 What is the issue

@@ -8,6 +8,7 @@ import {locales} from "@/constants/locales";
 import {useEffect, useState} from "react";
 import {containerVariants, itemVariants} from "@/components/layout/header/animations";
 import {useLocale, useTranslations} from "next-intl";
+import ClientPortal from "@/components/ui/ClientPortal";
 
 export default function MobileNav() {
     const currentLocale = useLocale();
@@ -20,12 +21,15 @@ export default function MobileNav() {
 
     useEffect(() => {
         if (isOpen) {
+            document.documentElement.style.overflow = "hidden";
             document.body.style.overflow = "hidden";
         } else {
+            document.documentElement.style.overflow = "";
             document.body.style.overflow = "";
         }
 
         return () => {
+            document.documentElement.style.overflow = "";
             document.body.style.overflow = "";
         };
     }, [isOpen]);
@@ -43,9 +47,9 @@ export default function MobileNav() {
                     {isOpen ? <LuX aria-hidden="true" size={24}/> : <LuMenu aria-hidden="true" size={24}/>}
                 </button>
             </div>
-            <AnimatePresence>
-                {isOpen && (
-                    <div className="fixed inset-0 flex flex-col">
+            <ClientPortal>
+                <AnimatePresence>
+                    {isOpen && (
                         <motion.nav
                             id="mobile-navigation-menu"
                             aria-label={tMobileNav("navLabel")}
@@ -53,8 +57,8 @@ export default function MobileNav() {
                             initial="hidden"
                             animate="visible"
                             exit="hidden"
-                            className="absolute z-9 w-full h-full -top-1/2 bg-neutral-900 border border-neutral-800 rounded-b-2xl flex flex-col justify-end p-4">
-                            <ul className="h-1/2 flex flex-col justify-center gap-5 text-xl text-center">
+                            className="fixed inset-0 flex flex-col">
+                            <ul className="bg-neutral-900 border border-neutral-800 border-t-neutral-900 rounded-b-2xl flex flex-col justify-center gap-5 text-xl text-center p-4">
                                 {navLinks.map((link) => {
                                     const isActive = link.href === '/'
                                         ? path === '/'
@@ -98,21 +102,21 @@ export default function MobileNav() {
                                     })}
                                 </motion.li>
                             </ul>
+                            <motion.div
+                                initial={{opacity: 0}}
+                                animate={{opacity: 1}}
+                                exit={{opacity: 0}}
+                                transition={{duration: 0.4, ease: "easeInOut"}}
+                                className="backdrop-blur-xs grow"
+                                onClick={() => {
+                                    setIsOpen(false)
+                                }}
+                                aria-hidden="true"
+                            />
                         </motion.nav>
-                        <motion.div
-                            initial={{opacity: 0}}
-                            animate={{opacity: 1}}
-                            exit={{opacity: 0}}
-                            transition={{duration: 0.4, ease: "easeInOut"}}
-                            className="backdrop-blur-xs grow w-full h-full"
-                            onClick={() => {
-                                setIsOpen(false)
-                            }}
-                            aria-hidden="true"
-                        />
-                    </div>
-                )}
-            </AnimatePresence>
+                    )}
+                </AnimatePresence>
+            </ClientPortal>
         </>
     );
 }

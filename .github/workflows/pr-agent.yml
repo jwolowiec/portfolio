@@ -22,9 +22,9 @@ jobs:
         uses: the-pr-agent/pr-agent@main
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
-          config.model: "openrouter/google/gemma-4-31b-it:free"
-          config.fallback_models: '["openrouter/google/gemma-4-26b-a4b-it:free"]'
+          OPENROUTER_API_KEY: ${{ secrets.OLLAMA_API_KEY }}
+          config.model: "ollama/gpt-oss:120b"
+          config.fallback_models: '["ollama/gpt-oss:20b"]'
           config.custom_model_max_tokens: "200000"
           pr_reviewer.require_score_review: "true"
           pr_reviewer.require_security_review: "true"

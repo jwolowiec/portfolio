@@ -22,7 +22,8 @@ jobs:
         uses: the-pr-agent/pr-agent@main
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          OPENROUTER_API_KEY: ${{ secrets.OLLAMA_API_KEY }}
+          OLLAMA_API_KEY: ${{ secrets.OLLAMA_API_KEY }}
+          OLLAMA_API_BASE: "https://ollama.com"
           config.model: "ollama/gpt-oss:120b"
           config.fallback_models: '["ollama/gpt-oss:20b"]'
           config.custom_model_max_tokens: "200000"

@@ -6,8 +6,13 @@ import {navLinks} from "@/constants/navigation";
 import {Link, usePathname} from "@/i18n/navigation";
 import {locales} from "@/constants/locales";
 import {useEffect, useState} from "react";
-import {containerVariants, itemVariants} from "@/components/layout/header/animations";
 import {useLocale, useTranslations} from "next-intl";
+import ClientPortal from "@/components/ui/ClientPortal";
+import {
+    fadeInVariants,
+    fadeStaggerContainerVariants,
+} from "@/lib/animations/variants";
+import {duration} from "@/lib/animations/constants";
 
 export default function MobileNav() {
     const currentLocale = useLocale();
@@ -19,14 +24,17 @@ export default function MobileNav() {
     const [isOpen, setIsOpen] = useState(false);
 
     useEffect(() => {
-        if (isOpen) {
-            document.body.style.overflow = "hidden";
-        } else {
-            document.body.style.overflow = "";
-        }
+        if (!isOpen) return;
+
+        const originalHtmlOverflow = document.documentElement.style.overflow;
+        const originalBodyOverflow = document.body.style.overflow;
+
+        document.documentElement.style.overflow = "hidden";
+        document.body.style.overflow = "hidden";
 
         return () => {
-            document.body.style.overflow = "";
+            document.documentElement.style.overflow = originalHtmlOverflow;
+            document.body.style.overflow = originalBodyOverflow;
         };
     }, [isOpen]);
 
@@ -43,18 +51,26 @@ export default function MobileNav() {
                     {isOpen ? <LuX aria-hidden="true" size={24}/> : <LuMenu aria-hidden="true" size={24}/>}
                 </button>
             </div>
-            <AnimatePresence>
-                {isOpen && (
-                    <div className="fixed inset-0 flex flex-col">
+            <ClientPortal>
+                <AnimatePresence>
+                    {isOpen && (
                         <motion.nav
                             id="mobile-navigation-menu"
                             aria-label={tMobileNav("navLabel")}
-                            variants={containerVariants}
+                            variants={fadeInVariants}
                             initial="hidden"
                             animate="visible"
                             exit="hidden"
-                            className="absolute z-9 w-full h-full -top-1/2 bg-neutral-900 border border-neutral-800 rounded-b-2xl flex flex-col justify-end p-4">
-                            <ul className="h-1/2 flex flex-col justify-center gap-5 text-xl text-center">
+                            className="fixed inset-0 bg-neutral-900/80 backdrop-blur-md flex flex-col justify-center"
+                        >
+                            <motion.ul
+                                variants={fadeStaggerContainerVariants}
+                                custom={{
+                                    customStagger: duration.fast,
+                                    customDelay: duration.short
+                                }}
+                                className="w-full flex flex-col gap-5 text-xl text-center p-5 overflow-auto min-h-0"
+                            >
                                 {navLinks.map((link) => {
                                     const isActive = link.href === '/'
                                         ? path === '/'
@@ -63,7 +79,7 @@ export default function MobileNav() {
                                     return (
                                         <motion.li
                                             key={link.href}
-                                            variants={itemVariants}
+                                            variants={fadeInVariants}
                                             className={`px-5 py-2 rounded-3xl z-10 ${
                                                 isActive ? "text-green-400 bg-green-500/10 border border-green-500/30" : "text-neutral-400 hover:text-white"}`}
                                         >
@@ -79,13 +95,14 @@ export default function MobileNav() {
                                     );
                                 })}
                                 <motion.li
-                                    variants={itemVariants}
+                                    variants={fadeInVariants}
                                     className="flex flex-row justify-center divide-x divide-neutral-500"
                                 >
                                     {locales.map((locale) => {
                                         const current = locale === currentLocale;
                                         return (
                                             <Link
+                                                onClick={() => setIsOpen(false)}
                                                 key={locale}
                                                 href={path}
                                                 locale={locale}
@@ -97,22 +114,11 @@ export default function MobileNav() {
                                         );
                                     })}
                                 </motion.li>
-                            </ul>
+                            </motion.ul>
                         </motion.nav>
-                        <motion.div
-                            initial={{opacity: 0}}
-                            animate={{opacity: 1}}
-                            exit={{opacity: 0}}
-                            transition={{duration: 0.4, ease: "easeInOut"}}
-                            className="backdrop-blur-xs grow w-full h-full"
-                            onClick={() => {
-                                setIsOpen(false)
-                            }}
-                            aria-hidden="true"
-                        />
-                    </div>
-                )}
-            </AnimatePresence>
+                    )}
+                </AnimatePresence>
+            </ClientPortal>
         </>
     );
 }

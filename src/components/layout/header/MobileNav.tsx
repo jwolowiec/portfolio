@@ -5,6 +5,7 @@ import {AnimatePresence, motion} from "framer-motion";
 import {navLinks} from "@/constants/navigation";
 import {Link, usePathname} from "@/i18n/navigation";
 import {locales} from "@/constants/locales";
+import {breakpoints} from "@/constants/breakpoints";
 import {useEffect, useState} from "react";
 import {useLocale, useTranslations} from "next-intl";
 import ClientPortal from "@/components/ui/ClientPortal";
@@ -22,6 +23,16 @@ export default function MobileNav() {
     const tMobileNav = useTranslations("common.Header.MobileNav");
 
     const [isOpen, setIsOpen] = useState(false);
+
+    useEffect(() => {
+        const desktopQuery = window.matchMedia(`(min-width: ${breakpoints.md}px)`);
+        const handleChange = (event: MediaQueryListEvent) => {
+            if (event.matches) setIsOpen(false);
+        };
+
+        desktopQuery.addEventListener("change", handleChange);
+        return () => desktopQuery.removeEventListener("change", handleChange);
+    }, []);
 
     useEffect(() => {
         if (!isOpen) return;
@@ -44,7 +55,7 @@ export default function MobileNav() {
                 <button
                     onClick={() => setIsOpen(!isOpen)}
                     aria-expanded={isOpen}
-                    aria-controls="mobile-navigation-menu"
+                    aria-controls={isOpen ? "mobile-navigation-menu" : undefined}
                     aria-label={isOpen ? tMobileNav("closeMenu") : tMobileNav("openMenu")}
                     className="p-3 bg-neutral-900/80 backdrop-blur-md border border-neutral-800 rounded-full active:scale-90 transition-transform"
                 >
@@ -61,7 +72,7 @@ export default function MobileNav() {
                             initial="hidden"
                             animate="visible"
                             exit="hidden"
-                            className="fixed inset-0 bg-neutral-900/80 backdrop-blur-md flex flex-col justify-center"
+                            className="z-40 fixed inset-0 bg-neutral-900/80 backdrop-blur-md flex flex-col justify-center"
                         >
                             <motion.ul
                                 variants={fadeStaggerContainerVariants}
@@ -86,7 +97,13 @@ export default function MobileNav() {
                                             <Link
                                                 onClick={() => setIsOpen(false)}
                                                 href={link.href}
-                                                aria-current={isActive ? "page" : undefined}
+                                                aria-current={
+                                                    isActive
+                                                        ? path === link.href
+                                                            ? "page"
+                                                            : "true"
+                                                        : undefined
+                                                }
                                                 className="block w-full h-full"
                                             >
                                                 {navLinksT(`${link.name}`)}
@@ -106,6 +123,7 @@ export default function MobileNav() {
                                                 key={locale}
                                                 href={path}
                                                 locale={locale}
+                                                aria-label={`${localesT(`${locale}.shortcut`)} — ${localesT(`${locale}.name`)}`}
                                                 aria-current={current ? "true" : undefined}
                                                 className={`text-base px-4 ${current ? "text-green-400" : "text-neutral-400 hover:text-white"}`}
                                             >

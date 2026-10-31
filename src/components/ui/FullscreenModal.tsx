@@ -67,7 +67,7 @@ export default function FullscreenModal({isOpen, onClose, children, label}: Moda
                                         className="cursor-pointer hover:scale-110"
                                     />
                                 </header>
-                                <div className="overflow-y-auto scrollbar">
+                                <div className="overflow-y-auto scrollbar -m-4 p-4">
                                     {children}
                                 </div>
                             </motion.div>

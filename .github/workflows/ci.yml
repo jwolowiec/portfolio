@@ -43,13 +43,13 @@ jobs:
           npx prisma db seed
         env:
           DATABASE_URL: postgresql://postgres:postgres_ci_dummy@localhost:5432/portfolio?schema=public
-          SHADOW_DATABASE_URL: postgresql://postgres:postgres_ci_dummy@localhost:5432/portfolio?schema=shadow
+          SHADOW_DATABASE_URL: postgresql://postgres:postgres_ci_dummy@localhost:5432/portfolio_shadow?schema=public
 
       - name: Build project
         run: npm run build
         env:
           DATABASE_URL: postgresql://postgres:postgres_ci_dummy@localhost:5432/portfolio?schema=public
-          SHADOW_DATABASE_URL: postgresql://postgres:postgres_ci_dummy@localhost:5432/portfolio?schema=shadow
+          SHADOW_DATABASE_URL: postgresql://postgres:postgres_ci_dummy@localhost:5432/portfolio_shadow?schema=public
 
   lint:
     name: Lint

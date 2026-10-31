@@ -3,7 +3,6 @@ import {contactFormAction} from "@/actions/contact-form/contactFormAction";
 import {sendMail} from "@/lib/mail/sendMail";
 import {verifyTurnstileToken} from "@/lib/turnstile/verify";
 import {logger} from "@/lib/logger/logger";
-import {SentMessageInfo} from "nodemailer";
 
 vi.mock('@/lib/mail/sendMail', () => ({
     sendMail: vi.fn(),
@@ -107,7 +106,19 @@ describe("contactFormAction", () => {
     describe("successful form submission", () => {
         it('should send email and return success', async () => {
             vi.mocked(verifyTurnstileToken).mockResolvedValue({ success: true, "error-codes": [] });
-            vi.mocked(sendMail).mockResolvedValue(undefined as SentMessageInfo);
+            vi.mocked(sendMail).mockResolvedValue({
+                accepted: ["recipient@domain.com"],
+                rejected: [],
+                envelope: {
+                    from: "sender@domain.com",
+                    to: ["recipient@domain.com"],
+                },
+                envelopeTime: 1,
+                messageTime: 1,
+                messageSize: 100,
+                messageId: "<test-message@domain.com>",
+                response: "250 OK",
+            });
 
             const result = await contactFormAction(validFormData);
 

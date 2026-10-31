@@ -22,8 +22,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           OLLAMA_API_KEY: ${{ secrets.OLLAMA_API_KEY }}
           OLLAMA_API_BASE: "https://ollama.com"
-          config.model: "ollama/gpt-oss:120b"
-          config.fallback_models: '["ollama/gpt-oss:20b"]'
+          config.model: ${{ vars.PR_AGENT_MODEL }}
+          config.fallback_models: ${{ vars.PR_AGENT_FALLBACK_MODELS }}
           config.custom_model_max_tokens: "200000"
           pr_reviewer.require_score_review: "true"
           pr_reviewer.require_security_review: "true"
